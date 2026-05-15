@@ -46,7 +46,7 @@ export default function ClientCreateForm() {
 
   return (
     <form className="grid gap-5" onSubmit={handleSubmit}>
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-2">
         <label className={fieldLabel}>
           <span className={labelText}>Nome</span>
           <input

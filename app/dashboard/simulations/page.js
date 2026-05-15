@@ -33,24 +33,11 @@ export default async function SimulationsPage({ searchParams }) {
 
   return (
     <div className={sectionStack}>
-      <section className={`${glassPanel} ${panelPadding}`}>
-        <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <h2 className={cardTitle}>Nova simulacao</h2>
-            <p className={mutedText}>
-              Monte a proposta completa neste modulo e vincule a um cliente somente quando fizer sentido.
-            </p>
-          </div>
-          <div className="rounded-[18px] border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
-            {clients.length} cliente(s) disponivel(is) para vinculo · {simulations.length} salvas
-          </div>
-        </div>
-        <SimulationWorkspace
-          consultantName={consultant.name}
-          clientOptions={clients}
-          defaultClientId={selectedClientId}
-        />
-      </section>
+      <SimulationWorkspace
+        consultantName={consultant.name}
+        clientOptions={clients}
+        defaultClientId={selectedClientId}
+      />
 
       <section className={`${glassPanel} ${panelPadding}`}>
         <div className="mb-5">
