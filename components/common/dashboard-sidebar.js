@@ -30,25 +30,6 @@ export default function DashboardSidebar({ consultant }) {
   return (
     <aside className="sticky top-0 flex h-screen flex-col border-r border-slate-200 bg-slate-50/95 px-3 py-4 backdrop-blur lg:px-4">
       <div className="flex min-h-0 flex-1 flex-col gap-4">
-        <div className="grid gap-3 rounded-[24px] border border-slate-200 bg-white p-4 shadow-[0_10px_30px_rgba(15,23,42,0.04)]">
-          <div className="flex items-center gap-3">
-            <div className="grid h-11 w-11 place-items-center rounded-2xl bg-[linear-gradient(135deg,#0f223a_0%,#1c4168_100%)] text-sm font-extrabold tracking-[0.12em] text-white">
-              SC
-            </div>
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-400">
-                Painel comercial
-              </p>
-              <h2 className="text-lg font-semibold tracking-[-0.03em] text-slate-950">
-                Consorcio CRM
-              </h2>
-            </div>
-          </div>
-          <p className="text-sm leading-5 text-slate-500">
-            Acompanhamento de clientes, follow-ups e propostas em um unico fluxo.
-          </p>
-        </div>
-
         <div className="grid gap-4">
           <SidebarGroup label="Painel">
             {navGroups[0].items.map((item) => (
