@@ -1,6 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import {
+  dangerTextClass,
+  fieldLabel,
+  inputClass,
+  labelText,
+  primaryButtonClass,
+  textareaClass,
+} from "@/lib/ui";
 
 export default function ClientCreateForm() {
   const [form, setForm] = useState({
@@ -37,27 +45,47 @@ export default function ClientCreateForm() {
   }
 
   return (
-    <form className="stack-form" onSubmit={handleSubmit}>
-      <div className="field-grid">
-        <label className="field">
-          <span>Nome</span>
-          <input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} />
+    <form className="grid gap-5" onSubmit={handleSubmit}>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <label className={fieldLabel}>
+          <span className={labelText}>Nome</span>
+          <input
+            className={inputClass}
+            value={form.name}
+            onChange={(event) => setForm({ ...form, name: event.target.value })}
+          />
         </label>
-        <label className="field">
-          <span>Email</span>
-          <input value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} />
+        <label className={fieldLabel}>
+          <span className={labelText}>Email</span>
+          <input
+            className={inputClass}
+            value={form.email}
+            onChange={(event) => setForm({ ...form, email: event.target.value })}
+          />
         </label>
-        <label className="field">
-          <span>Telefone</span>
-          <input value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} />
+        <label className={fieldLabel}>
+          <span className={labelText}>Telefone</span>
+          <input
+            className={inputClass}
+            value={form.phone}
+            onChange={(event) => setForm({ ...form, phone: event.target.value })}
+          />
         </label>
-        <label className="field">
-          <span>Documento</span>
-          <input value={form.document} onChange={(event) => setForm({ ...form, document: event.target.value })} />
+        <label className={fieldLabel}>
+          <span className={labelText}>Documento</span>
+          <input
+            className={inputClass}
+            value={form.document}
+            onChange={(event) => setForm({ ...form, document: event.target.value })}
+          />
         </label>
-        <label className="field">
-          <span>Status</span>
-          <select value={form.status} onChange={(event) => setForm({ ...form, status: event.target.value })}>
+        <label className={fieldLabel}>
+          <span className={labelText}>Status</span>
+          <select
+            className={inputClass}
+            value={form.status}
+            onChange={(event) => setForm({ ...form, status: event.target.value })}
+          >
             <option value="lead">Lead</option>
             <option value="qualificado">Qualificado</option>
             <option value="proposta_enviada">Proposta enviada</option>
@@ -65,21 +93,27 @@ export default function ClientCreateForm() {
             <option value="cliente">Cliente</option>
           </select>
         </label>
-        <label className="field">
-          <span>Proximo follow-up</span>
+        <label className={fieldLabel}>
+          <span className={labelText}>Proximo follow-up</span>
           <input
+            className={inputClass}
             type="datetime-local"
             value={form.nextFollowUpAt}
             onChange={(event) => setForm({ ...form, nextFollowUpAt: event.target.value })}
           />
         </label>
       </div>
-      <label className="field">
-        <span>Observacoes</span>
-        <textarea rows="4" value={form.notes} onChange={(event) => setForm({ ...form, notes: event.target.value })} />
+      <label className={fieldLabel}>
+        <span className={labelText}>Observacoes</span>
+        <textarea
+          className={textareaClass}
+          rows="4"
+          value={form.notes}
+          onChange={(event) => setForm({ ...form, notes: event.target.value })}
+        />
       </label>
-      {error ? <p className="form-error">{error}</p> : null}
-      <button className="primary-button" type="submit" disabled={loading}>
+      {error ? <p className={dangerTextClass}>{error}</p> : null}
+      <button className={primaryButtonClass} type="submit" disabled={loading}>
         {loading ? "Salvando..." : "Salvar cliente"}
       </button>
     </form>

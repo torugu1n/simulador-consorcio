@@ -1,7 +1,9 @@
 .next
+.next-dev
 node_modules
 npm-debug.log*
 .DS_Store
 .env
 .env.local
 .env.*.local
+prisma/prisma/

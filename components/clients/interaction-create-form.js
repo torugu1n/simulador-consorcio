@@ -1,6 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import {
+  dangerTextClass,
+  fieldLabel,
+  inputClass,
+  labelText,
+  primaryButtonClass,
+  textareaClass,
+} from "@/lib/ui";
 
 export default function InteractionCreateForm({ clientId }) {
   const [form, setForm] = useState({
@@ -35,36 +43,50 @@ export default function InteractionCreateForm({ clientId }) {
   }
 
   return (
-    <form className="stack-form" onSubmit={handleSubmit}>
-      <div className="field-grid two-columns">
-        <label className="field">
-          <span>Tipo</span>
-          <select value={form.type} onChange={(event) => setForm({ ...form, type: event.target.value })}>
+    <form className="grid gap-5" onSubmit={handleSubmit}>
+      <div className="grid gap-4 md:grid-cols-2">
+        <label className={fieldLabel}>
+          <span className={labelText}>Tipo</span>
+          <select
+            className={inputClass}
+            value={form.type}
+            onChange={(event) => setForm({ ...form, type: event.target.value })}
+          >
             <option value="follow_up">Follow-up</option>
             <option value="ligacao">Ligacao</option>
             <option value="whatsapp">WhatsApp</option>
             <option value="reuniao">Reuniao</option>
           </select>
         </label>
-        <label className="field">
-          <span>Agendado para</span>
+        <label className={fieldLabel}>
+          <span className={labelText}>Agendado para</span>
           <input
+            className={inputClass}
             type="datetime-local"
             value={form.scheduledAt}
             onChange={(event) => setForm({ ...form, scheduledAt: event.target.value })}
           />
         </label>
       </div>
-      <label className="field">
-        <span>Assunto</span>
-        <input value={form.subject} onChange={(event) => setForm({ ...form, subject: event.target.value })} />
+      <label className={fieldLabel}>
+        <span className={labelText}>Assunto</span>
+        <input
+          className={inputClass}
+          value={form.subject}
+          onChange={(event) => setForm({ ...form, subject: event.target.value })}
+        />
       </label>
-      <label className="field">
-        <span>Descricao</span>
-        <textarea rows="4" value={form.notes} onChange={(event) => setForm({ ...form, notes: event.target.value })} />
+      <label className={fieldLabel}>
+        <span className={labelText}>Descricao</span>
+        <textarea
+          className={textareaClass}
+          rows="4"
+          value={form.notes}
+          onChange={(event) => setForm({ ...form, notes: event.target.value })}
+        />
       </label>
-      {error ? <p className="form-error">{error}</p> : null}
-      <button className="primary-button" type="submit" disabled={loading}>
+      {error ? <p className={dangerTextClass}>{error}</p> : null}
+      <button className={primaryButtonClass} type="submit" disabled={loading}>
         {loading ? "Registrando..." : "Registrar acompanhamento"}
       </button>
     </form>

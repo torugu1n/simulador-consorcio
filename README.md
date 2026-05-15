@@ -20,8 +20,12 @@ Aplicação completa em `Next.js` para consultores:
 
 ## Ambiente local
 
+O projeto agora usa:
+- `SQLite` no desenvolvimento local
+- `PostgreSQL` no Railway/produção
+
 1. Copie `.env.example` para `.env`.
-2. Preencha `DATABASE_URL` e `AUTH_SECRET`.
+2. Preencha `AUTH_SECRET`.
 3. Gere o client do Prisma.
 4. Suba o schema no banco.
 5. Rode o app.
@@ -40,11 +44,11 @@ Abra `http://localhost:3000`.
 1. Crie um serviço `PostgreSQL` no Railway.
 2. Crie um serviço para esta aplicação.
 3. Configure as variáveis:
-   - `DATABASE_URL`
+   - `DATABASE_URL` com a URL do PostgreSQL do Railway
    - `AUTH_SECRET`
 4. O arquivo `railway.json` já está configurado para:
    - build com `npm install && npm run build`
-   - start com `npm run db:push && npm start`
+   - start com `npm run db:push:prod && npm start`
 
 ## Estrutura principal
 

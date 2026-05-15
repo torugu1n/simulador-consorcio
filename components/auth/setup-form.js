@@ -1,6 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import {
+  dangerTextClass,
+  fieldLabel,
+  inputClass,
+  labelText,
+  primaryButtonClass,
+} from "@/lib/ui";
 
 export default function SetupForm() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -29,26 +36,29 @@ export default function SetupForm() {
   }
 
   return (
-    <form className="stack-form" onSubmit={handleSubmit}>
-      <label className="field">
-        <span>Nome</span>
+    <form className="grid gap-5" onSubmit={handleSubmit}>
+      <label className={fieldLabel}>
+        <span className={labelText}>Nome</span>
         <input
+          className={inputClass}
           type="text"
           value={form.name}
           onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
         />
       </label>
-      <label className="field">
-        <span>Email</span>
+      <label className={fieldLabel}>
+        <span className={labelText}>Email</span>
         <input
+          className={inputClass}
           type="email"
           value={form.email}
           onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
         />
       </label>
-      <label className="field">
-        <span>Senha</span>
+      <label className={fieldLabel}>
+        <span className={labelText}>Senha</span>
         <input
+          className={inputClass}
           type="password"
           value={form.password}
           onChange={(event) =>
@@ -56,8 +66,8 @@ export default function SetupForm() {
           }
         />
       </label>
-      {error ? <p className="form-error">{error}</p> : null}
-      <button type="submit" className="primary-button" disabled={loading}>
+      {error ? <p className={dangerTextClass}>{error}</p> : null}
+      <button type="submit" className={primaryButtonClass} disabled={loading}>
         {loading ? "Criando..." : "Criar acesso"}
       </button>
     </form>

@@ -1,5 +1,6 @@
 import { requireConsultant } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { deserializeSimulationPayload } from "@/lib/simulation-records";
 import { buildClientReport } from "@/lib/simulator";
 import { renderReportPdf } from "@/lib/report-pdf";
 
@@ -16,7 +17,7 @@ export async function GET(_request, { params }) {
     return Response.json({ error: "Simulacao nao encontrada." }, { status: 404 });
   }
 
-  const report = buildClientReport(simulation.payload);
+  const report = buildClientReport(deserializeSimulationPayload(simulation.payload));
   const pdfBuffer = await renderReportPdf(report);
   const filenameBase = (report.input.clientName || simulation.title)
     .normalize("NFD")

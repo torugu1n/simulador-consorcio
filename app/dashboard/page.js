@@ -1,80 +1,195 @@
 import Link from "next/link";
 import { requireConsultant } from "@/lib/auth";
 import { getDashboardData } from "@/lib/app-data";
+import { deserializeSimulationPayload } from "@/lib/simulation-records";
 import { formatCurrency, formatDateTime } from "@/lib/simulator";
+import {
+  ActivityIcon,
+  ClientsIcon,
+  DashboardIcon,
+  SimulationIcon,
+} from "@/components/common/icons";
+import {
+  badgeClass,
+  cardTitle,
+  glassPanel,
+  heroPanel,
+  metricCard,
+  mutedText,
+  panelPadding,
+  pageEyebrow,
+  primaryButtonClass,
+  rowCard,
+  sectionStack,
+} from "@/lib/ui";
 
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
   const consultant = await requireConsultant();
   const data = await getDashboardData(consultant.id);
+  const conversionRate =
+    data.clientCount > 0 ? Math.round((data.simulationCount / data.clientCount) * 100) : 0;
 
   return (
-    <div className="dashboard-stack">
-      <section className="hero-panel">
-        <div>
-          <p className="eyebrow">Visao geral</p>
-          <h1>Operacao comercial e acompanhamento de clientes</h1>
-          <p className="hero-copy">
-            Centralize follow-ups, simulacoes e propostas geradas para cada cliente.
-          </p>
+    <div className={sectionStack}>
+      <section className={heroPanel}>
+        <div className="grid gap-5 lg:grid-cols-[1.2fr_320px]">
+          <div>
+            <p className={`${pageEyebrow} text-orange-300`}>
+              <DashboardIcon className="h-4 w-4" />
+              Visao geral
+            </p>
+            <h1 className="max-w-3xl text-balance text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">
+              Operacao comercial e acompanhamento de clientes
+            </h1>
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-100/82 sm:text-base">
+              Centralize follow-ups, simulacoes e propostas geradas para cada cliente.
+            </p>
+          </div>
+
+          <div className="rounded-[28px] border border-white/12 bg-white/8 p-5 backdrop-blur-sm">
+            <span className="text-xs font-medium uppercase tracking-[0.18em] text-slate-200/80">
+              Consultor logado
+            </span>
+            <strong className="mt-3 block text-2xl font-semibold tracking-[-0.03em] text-white">
+              {consultant.name}
+            </strong>
+            <p className="mt-3 text-sm leading-6 text-slate-100/80">
+              Painel pronto para registrar leads, avancar negociacoes e entregar proposta em PDF.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link className={primaryButtonClass} href="/dashboard/clients">
+            Novo cliente
+          </Link>
+          <Link
+            className="inline-flex items-center justify-center rounded-full border border-white/18 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/14"
+            href="/dashboard/simulations"
+          >
+            Ver simulacoes
+          </Link>
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <article className="rounded-[24px] border border-white/10 bg-white/8 p-5 text-white">
+            <span className="text-sm text-slate-100/70">Ritmo comercial</span>
+            <strong className="mt-2 block text-3xl font-semibold tracking-[-0.03em]">
+              {conversionRate}%
+            </strong>
+            <p className="mt-2 text-sm leading-6 text-slate-100/80">
+              Relacao entre clientes cadastrados e simulacoes geradas.
+            </p>
+          </article>
+          <article className="rounded-[24px] border border-white/10 bg-white/8 p-5 text-white">
+            <span className="text-sm text-slate-100/70">Carteira ativa</span>
+            <strong className="mt-2 block text-3xl font-semibold tracking-[-0.03em]">
+              {data.pendingFollowUps}
+            </strong>
+            <p className="mt-2 text-sm leading-6 text-slate-100/80">
+              Follow-ups pendentes para manter a carteira aquecida.
+            </p>
+          </article>
         </div>
       </section>
 
-      <section className="metric-grid">
-        <article className="metric-card">
-          <span>Clientes</span>
-          <strong>{data.clientCount}</strong>
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <article className={metricCard}>
+          <span className="flex items-center gap-2 text-sm text-slate-500">
+            <ClientsIcon className="h-4 w-4" />
+            Clientes
+          </span>
+          <strong className="mt-2 block text-3xl font-semibold tracking-[-0.04em] text-slate-950">
+            {data.clientCount}
+          </strong>
         </article>
-        <article className="metric-card">
-          <span>Simulacoes</span>
-          <strong>{data.simulationCount}</strong>
+        <article className={metricCard}>
+          <span className="flex items-center gap-2 text-sm text-slate-500">
+            <SimulationIcon className="h-4 w-4" />
+            Simulacoes
+          </span>
+          <strong className="mt-2 block text-3xl font-semibold tracking-[-0.04em] text-slate-950">
+            {data.simulationCount}
+          </strong>
         </article>
-        <article className="metric-card">
-          <span>Follow-ups ativos</span>
-          <strong>{data.pendingFollowUps}</strong>
+        <article className={metricCard}>
+          <span className="flex items-center gap-2 text-sm text-slate-500">
+            <ActivityIcon className="h-4 w-4" />
+            Follow-ups ativos
+          </span>
+          <strong className="mt-2 block text-3xl font-semibold tracking-[-0.04em] text-slate-950">
+            {data.pendingFollowUps}
+          </strong>
         </article>
       </section>
 
-      <section className="workspace-grid">
-        <article className="panel input-panel">
-          <div className="panel-heading">
-            <h2>Clientes recentes</h2>
-            <p>Leads e clientes cadastrados mais recentemente.</p>
+      <section className="grid gap-5 xl:grid-cols-[1.08fr_0.92fr]">
+        <article className={`${glassPanel} ${panelPadding}`}>
+          <div className="mb-5">
+            <h2 className={cardTitle}>Clientes recentes</h2>
+            <p className={mutedText}>Leads e clientes com entrada mais recente no pipeline comercial.</p>
           </div>
-          <div className="saved-list">
+          <div className="grid gap-3">
             {data.recentClients.length === 0 ? (
-              <p className="empty-state">Nenhum cliente cadastrado ainda.</p>
+              <p className={mutedText}>Nenhum cliente cadastrado ainda.</p>
             ) : (
               data.recentClients.map((client) => (
-                <Link key={client.id} className="saved-card link-card" href={`/dashboard/clients/${client.id}`}>
-                  <strong>{client.name}</strong>
-                  <span>{client.status}</span>
-                  <p>{client.email || client.phone || "Sem contato principal."}</p>
+                <Link
+                  key={client.id}
+                  className={rowCard}
+                  href={`/dashboard/clients/${client.id}`}
+                >
+                  <div className="min-w-0">
+                    <strong className="block truncate text-base font-semibold text-slate-950">
+                      {client.name}
+                    </strong>
+                    <p className="mt-1 text-sm text-slate-500">
+                      {client.email || client.phone || "Sem contato principal."}
+                    </p>
+                  </div>
+                  <div className="flex items-center">
+                    <span className={badgeClass}>{client.status}</span>
+                  </div>
                 </Link>
               ))
             )}
           </div>
         </article>
 
-        <article className="panel saved-panel">
-          <div className="panel-heading">
-            <h2>Simulacoes recentes</h2>
-            <p>Ultimas propostas geradas no ambiente.</p>
+        <article className={`${glassPanel} ${panelPadding}`}>
+          <div className="mb-5">
+            <h2 className={cardTitle}>Simulacoes recentes</h2>
+            <p className={mutedText}>Ultimas propostas geradas e prontas para envio ao cliente.</p>
           </div>
-          <div className="saved-list">
+          <div className="grid gap-3">
             {data.recentSimulations.length === 0 ? (
-              <p className="empty-state">Nenhuma simulacao salva ainda.</p>
+              <p className={mutedText}>Nenhuma simulacao salva ainda.</p>
             ) : (
-              data.recentSimulations.map((simulation) => (
-                <article key={simulation.id} className="saved-card">
-                  <strong>{simulation.title}</strong>
-                  <span>{simulation.client?.name || "Sem cliente vinculado"}</span>
-                  <p>
-                    {formatCurrency(simulation.payload.assetValue)} · {formatDateTime(simulation.createdAt)}
-                  </p>
-                </article>
-              ))
+              data.recentSimulations.map((simulation) => {
+                const payload = deserializeSimulationPayload(simulation.payload);
+                return (
+                  <article key={simulation.id} className={rowCard}>
+                    <div className="min-w-0">
+                      <strong className="block truncate text-base font-semibold text-slate-950">
+                        {simulation.title}
+                      </strong>
+                      <p className="mt-1 text-sm text-slate-500">
+                        {simulation.client?.name || "Sem cliente vinculado"}
+                      </p>
+                    </div>
+                    <div className="text-left sm:text-right">
+                      <span className="block text-sm font-semibold text-slate-800">
+                        {formatCurrency(payload.assetValue)}
+                      </span>
+                      <p className="mt-1 text-sm text-slate-500">
+                        {formatDateTime(simulation.createdAt)}
+                      </p>
+                    </div>
+                  </article>
+                );
+              })
             )}
           </div>
         </article>

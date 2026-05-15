@@ -41,10 +41,6 @@ export async function middleware(request) {
     return NextResponse.redirect(loginUrl);
   }
 
-  if (authenticated && isPublicPage) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
-
   return NextResponse.next();
 }
 

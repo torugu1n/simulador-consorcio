@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run db:generate:dev && next dev",
+    "build": "npm run db:generate:prod && next build",
+    "build:local": "npm run db:generate:dev && next build",
     "start": "next start",
+    "preview": "npm run build:local && next start",
     "lint": "next lint",
-    "postinstall": "prisma generate",
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push",
-    "db:migrate": "prisma migrate dev",
-    "db:deploy": "prisma migrate deploy"
+    "postinstall": "npm run db:generate:prod",
+    "db:generate": "npm run db:generate:dev",
+    "db:generate:dev": "prisma generate --schema prisma/schema.dev.prisma",
+    "db:generate:prod": "prisma generate --schema prisma/schema.prisma",
+    "db:push": "prisma db push --schema prisma/schema.dev.prisma",
+    "db:push:prod": "prisma db push --schema prisma/schema.prisma",
+    "db:migrate": "prisma migrate dev --schema prisma/schema.dev.prisma",
+    "db:deploy": "prisma migrate deploy --schema prisma/schema.prisma",
+    "seed:admin": "node scripts/seed-admin.mjs"
   },
   "dependencies": {
     "@prisma/client": "^6.8.2",
@@ -23,5 +29,10 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "zod": "^3.25.28"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^4.3.0"
   }
 }

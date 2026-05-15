@@ -1,5 +1,6 @@
 import { requireConsultant } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { serializeSimulationPayload } from "@/lib/simulation-records";
 import { simulationSchema } from "@/lib/validators";
 
 export async function POST(request) {
@@ -22,7 +23,7 @@ export async function POST(request) {
       clientId: parsed.data.clientId || null,
       title: parsed.data.title,
       notes: parsed.data.notes || null,
-      payload,
+      payload: serializeSimulationPayload(payload),
     },
   });
 
