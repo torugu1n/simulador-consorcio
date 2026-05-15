@@ -1,5 +1,5 @@
 import LoginForm from "@/components/auth/login-form";
-import { getSession } from "@/lib/auth";
+import { getCurrentConsultant } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import {
   authBrandPanel,
@@ -16,16 +16,16 @@ import { redirect } from "next/navigation";
 export const dynamic = "force-dynamic";
 
 export default async function LoginPage() {
-  const [consultantCount, session] = await Promise.all([
+  const [consultantCount, consultant] = await Promise.all([
     prisma.consultant.count(),
-    getSession(),
+    getCurrentConsultant(),
   ]);
 
   if (consultantCount === 0) {
     redirect("/setup");
   }
 
-  if (session?.sub) {
+  if (consultant) {
     redirect("/dashboard");
   }
 

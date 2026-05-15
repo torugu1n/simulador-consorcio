@@ -34,21 +34,21 @@ export default async function DashboardPage() {
   return (
     <div className={sectionStack}>
       <section className={heroPanel}>
-        <div className="grid gap-5 lg:grid-cols-[1.2fr_320px]">
+        <div className="grid gap-4 lg:grid-cols-[1.2fr_280px]">
           <div>
-            <p className={`${pageEyebrow} text-orange-300`}>
+            <p className={`${pageEyebrow} text-amber-300`}>
               <DashboardIcon className="h-4 w-4" />
               Visao geral
             </p>
-            <h1 className="max-w-3xl text-balance text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">
+            <h1 className="max-w-3xl text-balance text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
               Operacao comercial e acompanhamento de clientes
             </h1>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-100/82 sm:text-base">
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-100/82">
               Centralize follow-ups, simulacoes e propostas geradas para cada cliente.
             </p>
           </div>
 
-          <div className="rounded-[28px] border border-white/12 bg-white/8 p-5 backdrop-blur-sm">
+          <div className="rounded-[24px] border border-white/12 bg-white/8 p-4 backdrop-blur-sm">
             <span className="text-xs font-medium uppercase tracking-[0.18em] text-slate-200/80">
               Consultor logado
             </span>
@@ -61,7 +61,7 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-5 flex flex-wrap gap-3">
           <Link className={primaryButtonClass} href="/dashboard/clients">
             Novo cliente
           </Link>
@@ -73,8 +73,8 @@ export default async function DashboardPage() {
           </Link>
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <article className="rounded-[24px] border border-white/10 bg-white/8 p-5 text-white">
+        <div className="mt-5 grid gap-3 md:grid-cols-2">
+          <article className="rounded-[22px] border border-white/10 bg-white/8 p-4 text-white">
             <span className="text-sm text-slate-100/70">Ritmo comercial</span>
             <strong className="mt-2 block text-3xl font-semibold tracking-[-0.03em]">
               {conversionRate}%
@@ -83,7 +83,7 @@ export default async function DashboardPage() {
               Relacao entre clientes cadastrados e simulacoes geradas.
             </p>
           </article>
-          <article className="rounded-[24px] border border-white/10 bg-white/8 p-5 text-white">
+          <article className="rounded-[22px] border border-white/10 bg-white/8 p-4 text-white">
             <span className="text-sm text-slate-100/70">Carteira ativa</span>
             <strong className="mt-2 block text-3xl font-semibold tracking-[-0.03em]">
               {data.pendingFollowUps}

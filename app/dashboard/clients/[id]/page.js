@@ -4,7 +4,6 @@ import { prisma } from "@/lib/db";
 import { deserializeSimulationPayload } from "@/lib/simulation-records";
 import { formatCurrency, formatDateTime, formatTerm } from "@/lib/simulator";
 import InteractionCreateForm from "@/components/clients/interaction-create-form";
-import SimulationWorkspace from "@/components/simulations/simulation-workspace";
 import {
   ActivityIcon,
   ClientsIcon,
@@ -49,20 +48,20 @@ export default async function ClientDetailPage({ params }) {
   return (
     <div className={sectionStack}>
       <section className={heroPanel}>
-        <div className="grid gap-5 lg:grid-cols-[1.2fr_320px]">
+        <div className="grid gap-4 lg:grid-cols-[1.2fr_280px]">
           <div>
-            <p className={`${pageEyebrow} text-orange-300`}>
+            <p className={`${pageEyebrow} text-amber-300`}>
               <ClientsIcon className="h-4 w-4" />
               Cliente
             </p>
-            <h1 className="text-balance text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">
+            <h1 className="text-balance text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
               {client.name}
             </h1>
-            <p className="mt-4 text-sm leading-7 text-slate-100/82 sm:text-base">
+            <p className="mt-3 text-sm leading-6 text-slate-100/82">
               {client.email || "Sem email"} · {client.phone || "Sem telefone"} · {client.status}
             </p>
           </div>
-          <div className="rounded-[28px] border border-white/12 bg-white/8 p-5 backdrop-blur-sm">
+          <div className="rounded-[24px] border border-white/12 bg-white/8 p-4 backdrop-blur-sm">
             <span className="text-xs font-medium uppercase tracking-[0.18em] text-slate-200/80">
               Resumo da conta
             </span>
@@ -83,8 +82,8 @@ export default async function ClientDetailPage({ params }) {
               <ActivityIcon className="h-5 w-5" />
             </span>
             <div>
-            <h2 className={cardTitle}>Acompanhamento</h2>
-            <p className={mutedText}>Registre contatos, proximas acoes e observacoes de venda.</p>
+              <h2 className={cardTitle}>Acompanhamento</h2>
+              <p className={mutedText}>Registre contatos, proximas acoes e observacoes de venda.</p>
             </div>
           </div>
           <InteractionCreateForm clientId={client.id} />
@@ -119,12 +118,19 @@ export default async function ClientDetailPage({ params }) {
               <FileTextIcon className="h-5 w-5" />
             </span>
             <div>
-            <h2 className={cardTitle}>Historico de simulacoes</h2>
-            <p className={mutedText}>
-              {client.simulations.length} simulacao(oes) vinculada(s) a este cliente.
-            </p>
+              <h2 className={cardTitle}>Historico de simulacoes</h2>
+              <p className={mutedText}>
+                {client.simulations.length} simulacao(oes) vinculada(s) a este cliente.
+              </p>
             </div>
           </div>
+          <a
+            href={`/dashboard/simulations?clientId=${client.id}`}
+            className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-700 transition hover:border-amber-300 hover:bg-amber-100"
+          >
+            <SimulationIcon className="h-4 w-4" />
+            Nova simulacao no modulo
+          </a>
           <div className="grid gap-3">
             {client.simulations.length === 0 ? (
               <p className={mutedText}>Nenhuma simulacao salva para este cliente.</p>
@@ -146,7 +152,7 @@ export default async function ClientDetailPage({ params }) {
                         {formatDateTime(simulation.createdAt)}
                       </span>
                       <a
-                        className="mt-2 inline-flex text-sm font-semibold text-orange-600 hover:text-orange-700"
+                        className="mt-2 inline-flex text-sm font-semibold text-amber-600 hover:text-amber-700"
                         href={`/api/simulations/${simulation.id}/pdf`}
                       >
                         Baixar PDF
@@ -158,25 +164,6 @@ export default async function ClientDetailPage({ params }) {
             )}
           </div>
         </article>
-      </section>
-
-      <section className={`${glassPanel} ${panelPadding}`}>
-        <div className="mb-5 flex items-start gap-3">
-          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-slate-100 text-slate-600">
-            <SimulationIcon className="h-5 w-5" />
-          </span>
-          <div>
-          <h2 className={cardTitle}>Nova simulacao para {client.name}</h2>
-          <p className={mutedText}>Monte a proposta, salve no historico e gere PDF para o cliente.</p>
-          </div>
-        </div>
-        <SimulationWorkspace
-          client={{
-            id: client.id,
-            name: client.name,
-          }}
-          consultantName={consultant.name}
-        />
       </section>
     </div>
   );

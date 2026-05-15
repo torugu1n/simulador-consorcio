@@ -2,65 +2,54 @@ import { requireConsultant } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { deserializeSimulationPayload } from "@/lib/simulation-records";
 import { formatCurrency, formatDateTime, formatTerm } from "@/lib/simulator";
-import {
-  ClientsIcon,
-  FileTextIcon,
-  SimulationIcon,
-} from "@/components/common/icons";
+import SimulationWorkspace from "@/components/simulations/simulation-workspace";
 import {
   cardTitle,
   glassPanel,
-  heroCopy,
   mutedText,
-  pageEyebrow,
-  pageTitle,
   panelPadding,
   rowCard,
   sectionStack,
-  statLabel,
-  statValue,
 } from "@/lib/ui";
 
 export const dynamic = "force-dynamic";
 
-export default async function SimulationsPage() {
+export default async function SimulationsPage({ searchParams }) {
   const consultant = await requireConsultant();
+  const selectedClientId = searchParams?.clientId || "";
   const simulations = await prisma.simulation.findMany({
     where: { consultantId: consultant.id },
     include: { client: true },
     orderBy: { createdAt: "desc" },
   });
-  const linkedCount = simulations.filter((simulation) => simulation.clientId).length;
+  const clients = await prisma.client.findMany({
+    where: { consultantId: consultant.id },
+    orderBy: { name: "asc" },
+    select: {
+      id: true,
+      name: true,
+    },
+  });
 
   return (
     <div className={sectionStack}>
-      <section className={`${glassPanel} ${panelPadding} grid gap-5 xl:grid-cols-[1.05fr_0.95fr]`}>
-        <div>
-          <p className={pageEyebrow}>
-            <SimulationIcon className="h-4 w-4" />
-            Simulacoes
-          </p>
-          <h1 className={pageTitle}>Propostas salvas e prontas para envio</h1>
-          <p className={heroCopy}>
-            Consulte o historico comercial, revise valores e baixe o PDF final para compartilhar com o cliente.
-          </p>
+      <section className={`${glassPanel} ${panelPadding}`}>
+        <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <h2 className={cardTitle}>Nova simulacao</h2>
+            <p className={mutedText}>
+              Monte a proposta completa neste modulo e vincule a um cliente somente quando fizer sentido.
+            </p>
+          </div>
+          <div className="rounded-[18px] border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+            {clients.length} cliente(s) disponivel(is) para vinculo · {simulations.length} salvas
+          </div>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <article className="rounded-[22px] border border-slate-200 bg-slate-50 p-5">
-            <span className={`${statLabel} flex items-center gap-2`}>
-              <FileTextIcon className="h-4 w-4" />
-              Total salvo
-            </span>
-            <strong className={statValue}>{simulations.length}</strong>
-          </article>
-          <article className="rounded-[22px] border border-slate-200 bg-slate-50 p-5">
-            <span className={`${statLabel} flex items-center gap-2`}>
-              <ClientsIcon className="h-4 w-4" />
-              Com cliente
-            </span>
-            <strong className={statValue}>{linkedCount}</strong>
-          </article>
-        </div>
+        <SimulationWorkspace
+          consultantName={consultant.name}
+          clientOptions={clients}
+          defaultClientId={selectedClientId}
+        />
       </section>
 
       <section className={`${glassPanel} ${panelPadding}`}>
@@ -92,7 +81,7 @@ export default async function SimulationsPage() {
                       {formatDateTime(simulation.createdAt)}
                     </p>
                     <a
-                      className="mt-2 inline-flex text-sm font-semibold text-orange-600 hover:text-orange-700"
+                      className="mt-2 inline-flex text-sm font-semibold text-amber-600 hover:text-amber-700"
                       href={`/api/simulations/${simulation.id}/pdf`}
                     >
                       Baixar PDF
