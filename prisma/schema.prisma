@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Consultant {
+  id           String              @id @default(cuid())
+  name         String
+  email        String              @unique
+  passwordHash String
+  role         String              @default("consultant")
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  clients      Client[]
+  simulations  Simulation[]
+  interactions ClientInteraction[]
+}
+
+model Client {
+  id             String              @id @default(cuid())
+  consultantId   String
+  name           String
+  email          String?
+  phone          String?
+  document       String?
+  status         String              @default("lead")
+  notes          String?
+  lastContactAt  DateTime?
+  nextFollowUpAt DateTime?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  consultant     Consultant          @relation(fields: [consultantId], references: [id], onDelete: Cascade)
+  interactions   ClientInteraction[]
+  simulations    Simulation[]
+
+  @@index([consultantId])
+  @@index([status])
+}
+
+model ClientInteraction {
+  id           String      @id @default(cuid())
+  clientId      String
+  consultantId  String
+  type          String      @default("follow_up")
+  subject       String
+  notes         String
+  scheduledAt   DateTime?
+  completedAt   DateTime?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  client        Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  consultant    Consultant  @relation(fields: [consultantId], references: [id], onDelete: Cascade)
+
+  @@index([clientId, createdAt])
+  @@index([consultantId, createdAt])
+}
+
+model Simulation {
+  id            String      @id @default(cuid())
+  consultantId  String
+  clientId      String?
+  title         String
+  notes         String?
+  payload       Json
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  consultant    Consultant  @relation(fields: [consultantId], references: [id], onDelete: Cascade)
+  client        Client?     @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
+  @@index([consultantId, createdAt])
+  @@index([clientId, createdAt])
+}
