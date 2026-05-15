@@ -2,6 +2,9 @@
   "name": "consorcio-simulador",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "npm run db:generate:dev && next dev",
     "build": "npm run db:generate:prod && next build",
@@ -22,17 +25,15 @@
   "dependencies": {
     "@prisma/client": "^6.8.2",
     "@react-pdf/renderer": "^4.5.1",
+    "@tailwindcss/postcss": "^4.3.0",
     "bcryptjs": "^3.0.2",
     "jose": "^6.0.11",
     "next": "^15.3.2",
+    "postcss": "^8.5.14",
     "prisma": "^6.8.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "tailwindcss": "^4.3.0",
     "zod": "^3.25.28"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.0",
-    "postcss": "^8.5.14",
-    "tailwindcss": "^4.3.0"
   }
 }
