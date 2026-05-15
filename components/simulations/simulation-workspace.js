@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   DEFAULT_VALUES,
   buildClientReport,
@@ -457,14 +457,32 @@ export default function SimulationWorkspace({
 }
 
 function CurrencyField({ label, value, onChange, disabled = false }) {
+  const [localValue, setLocalValue] = useState(() => formatCurrencyInput(value));
+  const [isFocused, setIsFocused] = useState(false);
+
+  // Sincroniza o valor formatado quando o campo perde o foco ou recebe um novo valor inicial
+  useEffect(() => {
+    if (!isFocused) {
+      setLocalValue(formatCurrencyInput(value));
+    }
+  }, [value, isFocused]);
+
+  function handleChange(e) {
+    const raw = e.target.value;
+    setLocalValue(raw);
+    onChange(raw);
+  }
+
   return (
     <label className={fieldLabel}>
       <span className={labelText}>{label}</span>
       <input
         className={`${inputClass} ${disabled ? "cursor-not-allowed bg-slate-50 text-slate-400" : ""}`}
         inputMode="decimal"
-        value={formatCurrencyInput(value)}
-        onChange={(event) => onChange(event.target.value)}
+        value={isFocused ? localValue : formatCurrencyInput(value)}
+        onChange={handleChange}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         disabled={disabled}
       />
     </label>
