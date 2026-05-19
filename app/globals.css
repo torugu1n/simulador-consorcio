@@ -2,6 +2,7 @@
 
 :root {
   color-scheme: light;
+  --font-mono: var(--font-fira-code), "Fira Code", ui-monospace, monospace;
 }
 
 * {
@@ -17,7 +18,15 @@ body {
   min-height: 100vh;
   background: linear-gradient(180deg, #f7f9fc 0%, #eef3f8 100%);
   color: #0f172a;
-  font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  font-family: var(--font-figtree), "Figtree", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-figtree), "Figtree", sans-serif;
+}
+
+code, kbd, pre, samp {
+  font-family: var(--font-mono);
 }
 
 a {

@@ -32,24 +32,24 @@ export default async function LoginPage() {
   return (
     <main className={`${pageShell} grid min-h-screen place-items-center px-4 py-6`}>
       <section className={`w-full max-w-6xl ${authCard}`}>
-        <div className={authBrandPanel}>
+        <div className={`${authBrandPanel} hidden lg:block`}>
           <p className={eyebrow}>Acesso de consultores</p>
           <h1 className={authHeroTitle}>Entrar no painel comercial</h1>
           <p className={authHeroCopy}>
-            Acompanhe clientes, simulacoes, follow-ups e gere propostas em PDF.
+            Acompanhe clientes, simulações, follow-ups e gere propostas em PDF.
           </p>
 
           <div className="mt-8 grid gap-4">
             <article className={featureCard}>
               <strong className="block text-base font-semibold">CRM operacional</strong>
               <p className="mt-2 text-sm leading-6 text-slate-100/80">
-                Controle de clientes, historico e proximas acoes em um unico painel.
+                Controle de clientes, histórico e próximas ações em um único painel.
               </p>
             </article>
             <article className={featureCard}>
-              <strong className="block text-base font-semibold">Simulacao comercial</strong>
+              <strong className="block text-base font-semibold">Simulação comercial</strong>
               <p className="mt-2 text-sm leading-6 text-slate-100/80">
-                Monte a proposta e entregue um PDF mais apresentavel para o cliente.
+                Monte a proposta e entregue um PDF mais apresentável para o cliente.
               </p>
             </article>
           </div>
@@ -59,7 +59,7 @@ export default async function LoginPage() {
           <div className="mb-8">
             <p className="text-sm font-medium text-slate-500">Entrar</p>
             <h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-slate-950">
-              Acesse sua operacao
+              Acesse sua operação
             </h2>
             <p className="mt-3 text-sm leading-6 text-slate-500">
               Use o email e a senha do consultor para continuar.

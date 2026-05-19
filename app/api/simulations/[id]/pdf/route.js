@@ -14,7 +14,7 @@ export async function GET(_request, { params }) {
   });
 
   if (!simulation) {
-    return Response.json({ error: "Simulacao nao encontrada." }, { status: 404 });
+    return Response.json({ error: "Simulação não encontrada." }, { status: 404 });
   }
 
   const report = buildClientReport(deserializeSimulationPayload(simulation.payload));

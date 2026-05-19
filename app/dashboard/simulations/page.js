@@ -41,12 +41,12 @@ export default async function SimulationsPage({ searchParams }) {
 
       <section className={`${glassPanel} ${panelPadding}`}>
         <div className="mb-5">
-          <h2 className={cardTitle}>Todas as simulacoes</h2>
-          <p className={mutedText}>{simulations.length} simulacao(oes) registradas.</p>
+          <h2 className={cardTitle}>Todas as simulações</h2>
+          <p className={mutedText}>{simulations.length} simulação(ões) registradas.</p>
         </div>
         <div className="grid gap-3">
           {simulations.length === 0 ? (
-            <p className={mutedText}>Nenhuma simulacao registrada ainda.</p>
+            <p className={mutedText}>Nenhuma simulação registrada ainda.</p>
           ) : (
             simulations.map((simulation) => {
               const payload = deserializeSimulationPayload(simulation.payload);

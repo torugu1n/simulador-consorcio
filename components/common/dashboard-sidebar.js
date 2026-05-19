@@ -16,63 +16,98 @@ const navGroups = [
     items: [{ href: "/dashboard", label: "Dashboard", icon: DashboardIcon }],
   },
   {
-    label: "Operacao",
+    label: "Operação",
     items: [
       { href: "/dashboard/clients", label: "Clientes", icon: ClientsIcon },
-      { href: "/dashboard/simulations", label: "Simulacoes", icon: SimulationIcon },
+      { href: "/dashboard/simulations", label: "Simulações", icon: SimulationIcon },
     ],
   },
 ];
+
+const allNavItems = navGroups.flatMap((g) => g.items);
 
 export default function DashboardSidebar({ consultant }) {
   const pathname = usePathname();
 
   return (
-    <aside className="sticky top-0 flex h-screen flex-col border-r border-slate-200 bg-slate-50/95 px-3 py-4 backdrop-blur lg:px-4">
-      <div className="flex min-h-0 flex-1 flex-col gap-4">
-        <div className="grid gap-4">
-          <SidebarGroup label="Painel">
-            {navGroups[0].items.map((item) => (
-              <SidebarLink key={item.href} item={item} pathname={pathname} />
-            ))}
-          </SidebarGroup>
-          <SidebarGroup label="Operacao">
-            {navGroups[1].items.map((item) => (
-              <SidebarLink key={item.href} item={item} pathname={pathname} />
-            ))}
-          </SidebarGroup>
+    <>
+      {/* Desktop sidebar */}
+      <aside className="sticky top-0 hidden h-screen flex-col border-r border-slate-200 bg-slate-50/95 px-3 py-4 backdrop-blur lg:flex lg:px-4">
+        <div className="flex min-h-0 flex-1 flex-col gap-4">
+          <div className="grid gap-4">
+            <SidebarGroup label="Painel">
+              {navGroups[0].items.map((item) => (
+                <SidebarLink key={item.href} item={item} pathname={pathname} />
+              ))}
+            </SidebarGroup>
+            <SidebarGroup label="Operação">
+              {navGroups[1].items.map((item) => (
+                <SidebarLink key={item.href} item={item} pathname={pathname} />
+              ))}
+            </SidebarGroup>
+          </div>
+
+          <div className="mt-auto rounded-[24px] border border-slate-200 bg-white p-4 shadow-[0_10px_30px_rgba(15,23,42,0.04)]">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+              Ambiente
+            </p>
+            <p className="mt-2 text-sm leading-5 text-slate-500">
+              Estrutura pronta para atendimento, simulação e entrega de PDF comercial.
+            </p>
+            <div className="mt-3">
+              <span className={badgeClass}>Ativo</span>
+            </div>
+          </div>
         </div>
 
-        <div className="mt-auto rounded-[24px] border border-slate-200 bg-white p-4 shadow-[0_10px_30px_rgba(15,23,42,0.04)]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-400">
-            Ambiente
-          </p>
-          <p className="mt-2 text-sm leading-5 text-slate-500">
-            Estrutura pronta para atendimento, simulacao e entrega de PDF comercial.
-          </p>
-          <div className="mt-3">
-            <span className={badgeClass}>Ativo</span>
+        <div className="mt-4 rounded-[24px] border border-slate-200 bg-white p-3.5 shadow-[0_10px_30px_rgba(15,23,42,0.04)]">
+          <div className="flex items-center gap-2.5">
+            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[linear-gradient(135deg,#4f46e5_0%,#6d28d9_100%)] text-sm font-semibold text-white">
+              {consultant.name.slice(0, 1).toUpperCase()}
+            </div>
+            <div className="min-w-0 flex-1">
+              <strong className="block truncate text-sm font-semibold text-slate-950">
+                {consultant.name}
+              </strong>
+              <span className="block text-xs text-slate-500">
+                {consultant.role === "admin" ? "Administrador" : "Consultor"}
+              </span>
+            </div>
+            <LogoutButton />
           </div>
         </div>
-      </div>
+      </aside>
 
-      <div className="mt-4 rounded-[24px] border border-slate-200 bg-white p-3.5 shadow-[0_10px_30px_rgba(15,23,42,0.04)]">
-        <div className="flex items-center gap-2.5">
-          <div className="grid h-10 w-10 place-items-center rounded-full bg-[linear-gradient(135deg,#4f46e5_0%,#6d28d9_100%)] text-sm font-semibold text-white">
-            {consultant.name.slice(0, 1).toUpperCase()}
-          </div>
-          <div className="min-w-0 flex-1">
-            <strong className="block truncate text-sm font-semibold text-slate-950">
-              {consultant.name}
-            </strong>
-            <span className="block text-xs text-slate-500">
-              {consultant.role === "admin" ? "Administrador" : "Consultor"}
-            </span>
-          </div>
-          <LogoutButton />
-        </div>
-      </div>
-    </aside>
+      {/* Mobile bottom tab bar */}
+      <nav className="fixed inset-x-0 bottom-0 z-50 flex border-t border-slate-200 bg-white/95 backdrop-blur-sm lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+        {allNavItems.map((item) => {
+          const Icon = item.icon;
+          const isActive =
+            pathname === item.href ||
+            (item.href !== "/dashboard" && pathname.startsWith(item.href));
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={[
+                "flex flex-1 flex-col items-center gap-1 py-3 text-[10px] font-semibold tracking-[0.06em] transition",
+                isActive ? "text-indigo-600" : "text-slate-400",
+              ].join(" ")}
+            >
+              <span
+                className={[
+                  "grid h-7 w-7 place-items-center rounded-xl transition",
+                  isActive ? "bg-indigo-50 text-indigo-600" : "text-slate-400",
+                ].join(" ")}
+              >
+                <Icon className="h-4 w-4" />
+              </span>
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
+    </>
   );
 }
 

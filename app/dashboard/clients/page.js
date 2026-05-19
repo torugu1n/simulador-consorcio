@@ -39,10 +39,10 @@ export default async function ClientsPage() {
           </p>
           <h1 className={pageTitle}>Carteira comercial e novas entradas</h1>
           <p className={heroCopy}>
-            Cadastre novos contatos, mantenha o pipeline limpo e acompanhe a evolucao de cada negociacao.
+            Cadastre novos contatos, mantenha o pipeline limpo e acompanhe a evolução de cada negociação.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-3 gap-3">
           <article className="rounded-[22px] border border-slate-200 bg-slate-50 p-5">
             <span className={`${statLabel} flex items-center gap-2`}>
               <UsersIcon className="h-4 w-4" />
@@ -60,7 +60,7 @@ export default async function ClientsPage() {
           <article className="rounded-[22px] border border-slate-200 bg-slate-50 p-5">
             <span className={`${statLabel} flex items-center gap-2`}>
               <ClientsIcon className="h-4 w-4" />
-              Ja avancados
+              Já avançados
             </span>
             <strong className={statValue}>{qualifiedCount}</strong>
           </article>
@@ -71,7 +71,7 @@ export default async function ClientsPage() {
         <article className={`${glassPanel} ${panelPadding}`}>
           <div className="mb-5">
             <h2 className={cardTitle}>Novo cliente</h2>
-            <p className={mutedText}>Cadastre leads e defina o proximo acompanhamento.</p>
+            <p className={mutedText}>Cadastre leads e defina o próximo acompanhamento.</p>
           </div>
           <ClientCreateForm />
         </article>

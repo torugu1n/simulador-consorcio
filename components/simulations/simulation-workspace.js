@@ -45,7 +45,7 @@ function buildInitialState({ client, consultantName, defaultClientId, clientOpti
     clientId: selectedClient?.id || "",
     clientName: selectedClient?.name || "",
     consultantName,
-    title: selectedClient?.name ? `Simulacao ${selectedClient.name}` : "Simulacao geral",
+    title: selectedClient?.name ? `Simulação ${selectedClient.name}` : "Simulação geral",
   };
 }
 
@@ -90,8 +90,8 @@ export default function SimulationWorkspace({
       clientId: nextClient?.id || "",
       clientName: nextClient?.name || "",
       title:
-        nextClient && (current.title === "Simulacao geral" || current.title.startsWith("Simulacao "))
-          ? `Simulacao ${nextClient.name}`
+        nextClient && (current.title === "Simulação geral" || current.title.startsWith("Simulação "))
+          ? `Simulação ${nextClient.name}`
           : current.title,
     }));
   }
@@ -107,7 +107,7 @@ export default function SimulationWorkspace({
 
     if (!response.ok) {
       const data = await response.json();
-      setError(data.error || "Falha ao salvar simulacao.");
+      setError(data.error || "Falha ao salvar simulação.");
       setLoading(false);
       return;
     }
@@ -135,6 +135,7 @@ export default function SimulationWorkspace({
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     const filenameBase = (form.clientName || form.title || "simulacao-consorcio")
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
       .replace(/\s+/g, "-")
       .toLowerCase();
 
@@ -157,10 +158,10 @@ export default function SimulationWorkspace({
             </span>
             <div>
               <h3 className="text-lg font-semibold tracking-[-0.02em] text-slate-950">
-                Identificacao da proposta
+                Identificação da proposta
               </h3>
               <p className={mutedText}>
-                Defina cliente, titulo e dados comerciais usados no registro e no PDF.
+                Defina cliente, título e dados comerciais usados no registro e no PDF.
               </p>
             </div>
           </div>
@@ -173,7 +174,7 @@ export default function SimulationWorkspace({
                 value={form.clientId}
                 onChange={(event) => handleClientChange(event.target.value)}
               >
-                <option value="">Simulacao sem cliente</option>
+                <option value="">Simulação sem cliente</option>
                 {clientOptions.map((option) => (
                   <option key={option.id} value={option.id}>
                     {option.name}
@@ -191,7 +192,7 @@ export default function SimulationWorkspace({
               />
             </label>
             <label className={`${fieldLabel} md:col-span-2`}>
-              <span className={labelText}>Titulo interno da simulacao</span>
+              <span className={labelText}>Título interno da simulação</span>
               <input
                 className={inputClass}
                 value={form.title}
@@ -199,7 +200,7 @@ export default function SimulationWorkspace({
               />
             </label>
             <label className={`${fieldLabel} md:col-span-2`}>
-              <span className={labelText}>Titulo comercial do PDF</span>
+              <span className={labelText}>Título comercial do PDF</span>
               <input
                 className={inputClass}
                 value={form.proposalTitle}
@@ -216,10 +217,10 @@ export default function SimulationWorkspace({
             </label>
             <div className="rounded-[20px] border border-slate-200 bg-slate-50 px-4 py-3">
               <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
-                Vinculo atual
+                Vínculo atual
               </span>
               <p className="mt-2 text-sm font-medium text-slate-700">
-                {selectedClient ? `Simulacao vinculada a ${selectedClient.name}` : "Sem cliente vinculado"}
+                {selectedClient ? `Simulação vinculada a ${selectedClient.name}` : "Sem cliente vinculado"}
               </p>
             </div>
           </div>
@@ -232,7 +233,7 @@ export default function SimulationWorkspace({
             </span>
             <div>
               <h3 className="text-lg font-semibold tracking-[-0.02em] text-slate-950">
-                Parametros financeiros
+                Parâmetros financeiros
               </h3>
               <p className={mutedText}>
                 Defina prazo, taxas e valores base que determinam o comportamento da proposta.
@@ -243,33 +244,23 @@ export default function SimulationWorkspace({
           <div className="grid gap-3 md:grid-cols-2">
             <label className={fieldLabel}>
               <span className={labelText}>Prazo</span>
-              <input
-                className={inputClass}
-                type="number"
-                value={form.term}
-                onChange={(event) => updateField("term", event.target.value)}
-              />
+              <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white transition focus-within:border-amber-400 focus-within:ring-4 focus-within:ring-amber-100">
+                <input
+                  className="w-full bg-transparent py-2.5 pl-4 pr-16 text-sm text-slate-900 outline-none"
+                  inputMode="numeric"
+                  value={form.term}
+                  onChange={(event) => updateField("term", event.target.value.replace(/\D/g, ""))}
+                />
+                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm text-slate-400 select-none">
+                  meses
+                </span>
+              </div>
             </label>
-            <label className={fieldLabel}>
-              <span className={labelText}>Taxa de administracao (%)</span>
-              <input
-                className={inputClass}
-                type="number"
-                step="0.01"
-                value={form.adminRate}
-                onChange={(event) => updateField("adminRate", event.target.value)}
-              />
-            </label>
-            <label className={fieldLabel}>
-              <span className={labelText}>Seguro mensal (%)</span>
-              <input
-                className={inputClass}
-                type="number"
-                step="0.00001"
-                value={form.insuranceMonthlyRate}
-                onChange={(event) => updateField("insuranceMonthlyRate", event.target.value)}
-              />
-            </label>
+            <PercentField
+              label="Taxa de administração"
+              value={form.adminRate}
+              onChange={(v) => updateField("adminRate", v)}
+            />
             <div className="grid gap-3 md:col-span-2">
               <CurrencyField
                 label="Valor do bem"
@@ -277,7 +268,7 @@ export default function SimulationWorkspace({
                 onChange={(value) => updateField("assetValue", value)}
               />
               <CurrencyField
-                label="Recursos proprios"
+                label="Recursos próprios"
                 value={form.ownResources}
                 onChange={(value) => updateField("ownResources", value)}
               />
@@ -307,7 +298,7 @@ export default function SimulationWorkspace({
                           : "text-slate-500 hover:text-slate-700",
                       ].join(" ")}
                     >
-                      Nao
+                      Não
                     </button>
                   </div>
                 </label>
@@ -334,33 +325,33 @@ export default function SimulationWorkspace({
               Resumo financeiro
             </h3>
             <p className={mutedText}>
-              Leitura rapida dos numeros principais para validacao comercial imediata.
+              Leitura rápida dos números principais para validação comercial imediata.
             </p>
           </div>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
           <article className={metricCard}>
             <span className="text-sm text-slate-500">Total do lance</span>
-            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] text-slate-950">
+            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] tabular-nums truncate text-slate-950">
               {formatCurrency(simulation.metrics.totalBid)}
             </strong>
           </article>
           <article className={metricCard}>
             <span className="text-sm text-slate-500">% do lance</span>
-            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] text-slate-950">
+            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] tabular-nums truncate text-slate-950">
               {formatPercent(simulation.metrics.bidPercent)}
             </strong>
           </article>
           <article className={metricCard}>
-            <span className="text-sm text-slate-500">Parcela integral</span>
-            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] text-slate-950">
+            <span className="text-sm text-slate-500">Parcela integral (100%)</span>
+            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] tabular-nums truncate text-slate-950">
               {formatCurrency(simulation.metrics.fullInstallment)}
             </strong>
           </article>
           <article className={metricCard}>
-            <span className="text-sm text-slate-500">Parcela reduzida</span>
-            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] text-slate-950">
+            <span className="text-sm text-slate-500">Parcela reduzida (75%)</span>
+            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] tabular-nums truncate text-slate-950">
               {formatCurrency(simulation.metrics.reducedInstallment)}
             </strong>
           </article>
@@ -374,38 +365,48 @@ export default function SimulationWorkspace({
           </span>
           <div>
             <h3 className="text-lg font-semibold tracking-[-0.02em] text-slate-950">
-              Cenarios projetados
+              Cenários projetados
             </h3>
             <p className={mutedText}>
-              Compare os tres cenarios principais de contemplacao com foco em parcela e prazo.
+              Compare os quatro cenários de contemplação com foco em parcela e prazo.
             </p>
           </div>
         </div>
 
-        <div className="grid gap-3 xl:grid-cols-3">
+        <div className="grid gap-3 xl:grid-cols-2">
           {Object.values(simulation.scenarios).map((scenario) => (
             <article
-              key={`${scenario.title}-${scenario.mode}`}
+              key={scenario.id}
               className="rounded-[24px] border border-slate-200 bg-slate-50 p-5"
             >
               <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-amber-500">
-                Cenario
+                Cenário
               </p>
               <h3 className="text-lg font-semibold tracking-[-0.03em] text-slate-950">
                 {scenario.title}
               </h3>
               <span className={`mt-4 ${badgeClass}`}>{scenario.mode}</span>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <div>
-                  <span className="text-sm text-slate-500">Parcela</span>
-                  <strong className="mt-1.5 block text-xl font-semibold tracking-[-0.03em] text-slate-950">
+              <div className="mt-4 grid gap-3 grid-cols-3">
+                <div className="min-w-0">
+                  <span className="text-xs text-slate-500 sm:text-sm">
+                    {scenario.type === "installment" ? "Nova parcela" : "Parcela mantida"}
+                  </span>
+                  <strong className={`mt-1 block truncate text-base font-semibold tracking-[-0.02em] tabular-nums sm:text-xl ${scenario.type === "installment" ? "text-slate-950" : "text-slate-400"}`}>
                     {formatCurrency(scenario.installment)}
                   </strong>
                 </div>
-                <div>
-                  <span className="text-sm text-slate-500">Prazo restante</span>
-                  <strong className="mt-1.5 block text-xl font-semibold tracking-[-0.03em] text-slate-950">
+                <div className="min-w-0">
+                  <span className="text-xs text-slate-500 sm:text-sm">
+                    {scenario.type === "term" ? "Novo prazo" : "Prazo restante"}
+                  </span>
+                  <strong className={`mt-1 block truncate text-base font-semibold tracking-[-0.02em] sm:text-xl ${scenario.type === "term" ? "text-slate-950" : "text-slate-400"}`}>
                     {formatTerm(scenario.remainingTerm)}
+                  </strong>
+                </div>
+                <div className="min-w-0">
+                  <span className="text-xs text-slate-500 sm:text-sm">Custo total</span>
+                  <strong className="mt-1 block truncate text-base font-semibold tracking-[-0.02em] tabular-nums text-slate-950 sm:text-xl">
+                    {formatCurrency(scenario.totalCost)}
                   </strong>
                 </div>
               </div>
@@ -418,36 +419,46 @@ export default function SimulationWorkspace({
         <div className="grid gap-4 lg:grid-cols-[0.8fr_1.2fr] lg:items-stretch">
           <div className="grid content-between gap-3">
             <div>
-              <h2 className={sectionTitle}>{report.cover.title}</h2>
-              <p className={mutedText}>{report.cover.summary}</p>
+              <h2 className={sectionTitle}>Apresentação e PDF</h2>
+              <p className={mutedText}>
+                Configure o cenário recomendado e as observações comerciais finais.
+              </p>
             </div>
-            <div className="grid gap-3 rounded-[22px] border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
-              <p>Use esta area para orientar o cliente com a leitura comercial final.</p>
-              <ul className="grid gap-2 text-slate-500">
-                <li>• Proposta pronta para envio em PDF</li>
-                <li>• Lance embutido opcional com calculo automatico</li>
-                <li>• Vinculo com cliente para historico</li>
-              </ul>
+            <label className={fieldLabel}>
+              <span className={labelText}>Cenário Recomendado em Destaque</span>
+              <select
+                className={selectClass}
+                value={form.recommendedScenario}
+                onChange={(event) => updateField("recommendedScenario", event.target.value)}
+              >
+                <option value="fullAssetReducedInstallment">Crédito Integral — Redução de Parcela</option>
+                <option value="fullAssetReducedTerm">Crédito Integral — Redução de Prazo</option>
+                <option value="partialAssetReducedInstallment">Crédito Parcial (75%) — Redução de Parcela</option>
+                <option value="partialAssetReducedTerm">Crédito Parcial (75%) — Redução de Prazo</option>
+              </select>
+            </label>
+            <div className="grid gap-3 rounded-[22px] border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 mt-auto">
+              <p>O cenário selecionado ganhará destaque visual na página de comparativos do PDF comercial.</p>
             </div>
           </div>
           <label className={fieldLabel}>
-            <span className={labelText}>Observacoes do PDF</span>
+            <span className={labelText}>Observações do PDF</span>
             <textarea
               className="min-h-[120px] w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 outline-none transition focus:border-amber-400 focus:ring-4 focus:ring-amber-100"
               value={form.notes}
               onChange={(event) => updateField("notes", event.target.value)}
-              placeholder="Informacoes adicionais, condicoes comerciais ou observacoes do consultor."
+              placeholder="Informações adicionais, condições comerciais ou observações do consultor."
             />
           </label>
         </div>
 
         {error ? <p className="mt-4 text-sm text-red-700">{error}</p> : null}
 
-        <div className="mt-5 flex flex-wrap gap-3">
-          <button className={primaryButtonClass} onClick={handleSave} disabled={loading}>
-            {loading ? "Processando..." : "Salvar simulacao"}
+        <div className="mt-5 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
+          <button className={`${primaryButtonClass} w-full sm:w-auto`} onClick={handleSave} disabled={loading}>
+            {loading ? "Processando..." : "Salvar simulação"}
           </button>
-          <button className={secondaryButtonClass} onClick={handlePdf} disabled={loading}>
+          <button className={`${secondaryButtonClass} w-full sm:w-auto`} onClick={handlePdf} disabled={loading}>
             Baixar PDF
           </button>
         </div>
@@ -456,35 +467,123 @@ export default function SimulationWorkspace({
   );
 }
 
-function CurrencyField({ label, value, onChange, disabled = false }) {
-  const [localValue, setLocalValue] = useState(() => formatCurrencyInput(value));
+function PercentField({ label, value, onChange }) {
+  const [display, setDisplay] = useState(() => String(value).replace(".", ","));
   const [isFocused, setIsFocused] = useState(false);
 
-  // Sincroniza o valor formatado quando o campo perde o foco ou recebe um novo valor inicial
   useEffect(() => {
     if (!isFocused) {
-      setLocalValue(formatCurrencyInput(value));
+      setDisplay(String(value).replace(".", ","));
     }
   }, [value, isFocused]);
 
   function handleChange(e) {
-    const raw = e.target.value;
-    setLocalValue(raw);
-    onChange(raw);
+    // Permite dígitos, vírgula e no máximo 4 casas decimais
+    const raw = e.target.value.replace(/[^\d,]/g, "");
+    const parts = raw.split(",");
+    const masked = parts.length > 1
+      ? parts[0] + "," + parts.slice(1).join("").slice(0, 4)
+      : raw;
+    setDisplay(masked);
+    onChange(masked.replace(",", "."));
+  }
+
+  function handleBlur() {
+    setIsFocused(false);
+    const numeric = parseFloat(display.replace(",", "."));
+    if (!isNaN(numeric)) setDisplay(String(numeric).replace(".", ","));
   }
 
   return (
     <label className={fieldLabel}>
       <span className={labelText}>{label}</span>
-      <input
-        className={`${inputClass} ${disabled ? "cursor-not-allowed bg-slate-50 text-slate-400" : ""}`}
-        inputMode="decimal"
-        value={isFocused ? localValue : formatCurrencyInput(value)}
-        onChange={handleChange}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        disabled={disabled}
-      />
+      <div className="flex overflow-hidden rounded-2xl border border-slate-200 bg-white transition focus-within:border-amber-400 focus-within:ring-4 focus-within:ring-amber-100">
+        <input
+          className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-900 outline-none"
+          inputMode="decimal"
+          value={display}
+          onChange={handleChange}
+          onFocus={() => setIsFocused(true)}
+          onBlur={handleBlur}
+        />
+        <span className="flex items-center border-l border-slate-200 bg-slate-50 px-3 text-sm font-semibold text-slate-500 select-none">
+          %
+        </span>
+      </div>
+    </label>
+  );
+}
+
+// Formata string enquanto digita: "59000" → "59.000", "59000,5" → "59.000,5"
+function applyBrMask(raw) {
+  // Permite apenas dígitos e no máximo uma vírgula
+  const cleaned = raw.replace(/[^\d,]/g, "");
+  const commaIdx = cleaned.indexOf(",");
+  let intStr, decStr;
+
+  if (commaIdx === -1) {
+    intStr = cleaned;
+    decStr = null;
+  } else {
+    intStr = cleaned.slice(0, commaIdx);
+    decStr = cleaned.slice(commaIdx + 1, commaIdx + 3); // máximo 2 casas decimais
+  }
+
+  // Adiciona pontos a cada 3 dígitos na parte inteira
+  const intFormatted = intStr.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+  return decStr !== null ? `${intFormatted},${decStr}` : intFormatted;
+}
+
+// Converte a string mascarada para número
+function parseBrMask(masked) {
+  const noThousands = masked.replace(/\./g, "");
+  const dotDecimal = noThousands.replace(",", ".");
+  return dotDecimal;
+}
+
+function CurrencyField({ label, value, onChange, disabled = false }) {
+  const [display, setDisplay] = useState(() => formatCurrencyInput(value));
+  const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    if (!isFocused) {
+      setDisplay(formatCurrencyInput(value));
+    }
+  }, [value, isFocused]);
+
+  function handleChange(e) {
+    const masked = applyBrMask(e.target.value);
+    setDisplay(masked);
+    const numeric = parseFloat(parseBrMask(masked));
+    onChange(isNaN(numeric) ? 0 : numeric);
+  }
+
+  function handleBlur() {
+    setIsFocused(false);
+    const numeric = parseFloat(parseBrMask(display));
+    const corrected = isNaN(numeric) ? 0 : numeric;
+    setDisplay(formatCurrencyInput(corrected));
+    onChange(corrected);
+  }
+
+  return (
+    <label className={fieldLabel}>
+      <span className={labelText}>{label}</span>
+      <div className={`flex overflow-hidden rounded-2xl border border-slate-200 bg-white transition focus-within:border-amber-400 focus-within:ring-4 focus-within:ring-amber-100 ${disabled ? "bg-slate-50" : ""}`}>
+        <span className="flex items-center border-r border-slate-200 bg-slate-50 px-3 text-sm font-semibold text-slate-500 select-none">
+          R$
+        </span>
+        <input
+          className={`flex-1 bg-transparent px-3 py-2.5 text-sm text-slate-900 outline-none ${disabled ? "cursor-not-allowed text-slate-400" : ""}`}
+          inputMode="numeric"
+          value={display}
+          onChange={handleChange}
+          onFocus={() => setIsFocused(true)}
+          onBlur={handleBlur}
+          disabled={disabled}
+        />
+      </div>
     </label>
   );
 }

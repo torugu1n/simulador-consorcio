@@ -89,12 +89,12 @@ export default function ClientCreateForm() {
             <option value="lead">Lead</option>
             <option value="qualificado">Qualificado</option>
             <option value="proposta_enviada">Proposta enviada</option>
-            <option value="negociacao">Negociacao</option>
+            <option value="negociacao">Negociação</option>
             <option value="cliente">Cliente</option>
           </select>
         </label>
         <label className={fieldLabel}>
-          <span className={labelText}>Proximo follow-up</span>
+          <span className={labelText}>Próximo follow-up</span>
           <input
             className={inputClass}
             type="datetime-local"
@@ -104,7 +104,7 @@ export default function ClientCreateForm() {
         </label>
       </div>
       <label className={fieldLabel}>
-        <span className={labelText}>Observacoes</span>
+        <span className={labelText}>Observações</span>
         <textarea
           className={textareaClass}
           rows="4"

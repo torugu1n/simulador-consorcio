@@ -38,13 +38,13 @@ export default async function DashboardPage() {
           <div>
             <p className={`${pageEyebrow} text-amber-300`}>
               <DashboardIcon className="h-4 w-4" />
-              Visao geral
+              Visão geral
             </p>
             <h1 className="max-w-3xl text-balance text-3xl font-semibold tracking-[-0.05em] text-white sm:text-4xl">
-              Operacao comercial e acompanhamento de clientes
+              Operação comercial e acompanhamento de clientes
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-100/82">
-              Centralize follow-ups, simulacoes e propostas geradas para cada cliente.
+              Centralize follow-ups, simulações e propostas geradas para cada cliente.
             </p>
           </div>
 
@@ -56,7 +56,7 @@ export default async function DashboardPage() {
               {consultant.name}
             </strong>
             <p className="mt-3 text-sm leading-6 text-slate-100/80">
-              Painel pronto para registrar leads, avancar negociacoes e entregar proposta em PDF.
+              Painel pronto para registrar leads, avançar negociações e entregar proposta em PDF.
             </p>
           </div>
         </div>
@@ -69,7 +69,7 @@ export default async function DashboardPage() {
             className="inline-flex items-center justify-center rounded-full border border-white/18 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/14"
             href="/dashboard/simulations"
           >
-            Ver simulacoes
+            Ver simulações
           </Link>
         </div>
 
@@ -80,7 +80,7 @@ export default async function DashboardPage() {
               {conversionRate}%
             </strong>
             <p className="mt-2 text-sm leading-6 text-slate-100/80">
-              Relacao entre clientes cadastrados e simulacoes geradas.
+              Relação entre clientes cadastrados e simulações geradas.
             </p>
           </article>
           <article className="rounded-[22px] border border-white/10 bg-white/8 p-4 text-white">
@@ -108,7 +108,7 @@ export default async function DashboardPage() {
         <article className={metricCard}>
           <span className="flex items-center gap-2 text-sm text-slate-500">
             <SimulationIcon className="h-4 w-4" />
-            Simulacoes
+            Simulações
           </span>
           <strong className="mt-2 block text-3xl font-semibold tracking-[-0.04em] text-slate-950">
             {data.simulationCount}
@@ -160,12 +160,12 @@ export default async function DashboardPage() {
 
         <article className={`${glassPanel} ${panelPadding}`}>
           <div className="mb-5">
-            <h2 className={cardTitle}>Simulacoes recentes</h2>
+            <h2 className={cardTitle}>Simulações recentes</h2>
             <p className={mutedText}>Ultimas propostas geradas e prontas para envio ao cliente.</p>
           </div>
           <div className="grid gap-3">
             {data.recentSimulations.length === 0 ? (
-              <p className={mutedText}>Nenhuma simulacao salva ainda.</p>
+              <p className={mutedText}>Nenhuma simulação salva ainda.</p>
             ) : (
               data.recentSimulations.map((simulation) => {
                 const payload = deserializeSimulationPayload(simulation.payload);

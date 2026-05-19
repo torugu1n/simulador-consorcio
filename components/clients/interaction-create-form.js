@@ -34,7 +34,7 @@ export default function InteractionCreateForm({ clientId }) {
 
     if (!response.ok) {
       const data = await response.json();
-      setError(data.error || "Falha ao registrar interacao.");
+      setError(data.error || "Falha ao registrar interação.");
       setLoading(false);
       return;
     }
@@ -53,9 +53,9 @@ export default function InteractionCreateForm({ clientId }) {
             onChange={(event) => setForm({ ...form, type: event.target.value })}
           >
             <option value="follow_up">Follow-up</option>
-            <option value="ligacao">Ligacao</option>
+            <option value="ligacao">Ligação</option>
             <option value="whatsapp">WhatsApp</option>
-            <option value="reuniao">Reuniao</option>
+            <option value="reuniao">Reunião</option>
           </select>
         </label>
         <label className={fieldLabel}>
@@ -77,7 +77,7 @@ export default function InteractionCreateForm({ clientId }) {
         />
       </label>
       <label className={fieldLabel}>
-        <span className={labelText}>Descricao</span>
+        <span className={labelText}>Descrição</span>
         <textarea
           className={textareaClass}
           rows="4"

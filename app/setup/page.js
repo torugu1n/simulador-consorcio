@@ -29,23 +29,23 @@ export default async function SetupPage() {
     <main className={`${pageShell} grid min-h-screen place-items-center px-4 py-6`}>
       <section className={`w-full max-w-6xl ${authCard}`}>
         <div className={authBrandPanel}>
-          <p className={eyebrow}>Configuracao inicial</p>
+          <p className={eyebrow}>Configuração inicial</p>
           <h1 className={authHeroTitle}>Criar o primeiro consultor</h1>
           <p className={authHeroCopy}>
-            Esta etapa cria o primeiro acesso administrativo da aplicacao.
+            Esta etapa cria o primeiro acesso administrativo da aplicação.
           </p>
 
           <div className="mt-8 grid gap-4">
             <article className={featureCard}>
               <strong className="block text-base font-semibold">Primeiro acesso</strong>
               <p className="mt-2 text-sm leading-6 text-slate-100/80">
-                Defina o usuario responsavel pela operacao comercial inicial do sistema.
+                Defina o usuário responsável pela operação comercial inicial do sistema.
               </p>
             </article>
             <article className={featureCard}>
               <strong className="block text-base font-semibold">Ambiente pronto</strong>
               <p className="mt-2 text-sm leading-6 text-slate-100/80">
-                Depois do cadastro, o painel ja fica liberado para clientes, follow-ups e simulacoes.
+                Depois do cadastro, o painel já fica liberado para clientes, follow-ups e simulações.
               </p>
             </article>
           </div>
@@ -55,10 +55,10 @@ export default async function SetupPage() {
           <div className="mb-8">
             <p className="text-sm font-medium text-slate-500">Setup</p>
             <h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-slate-950">
-              Inicie a operacao
+              Inicie a operação
             </h2>
             <p className="mt-3 text-sm leading-6 text-slate-500">
-              Crie o usuario administrador inicial para liberar o restante do fluxo.
+              Crie o usuário administrador inicial para liberar o restante do fluxo.
             </p>
           </div>
           <SetupForm />

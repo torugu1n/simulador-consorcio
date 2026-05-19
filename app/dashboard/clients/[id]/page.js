@@ -66,7 +66,7 @@ export default async function ClientDetailPage({ params }) {
               Resumo da conta
             </span>
             <strong className="mt-3 block text-2xl font-semibold tracking-[-0.03em] text-white">
-              {client.simulations.length} simulacao(oes)
+              {client.simulations.length} simulação(ões)
             </strong>
             <p className="mt-3 text-sm leading-6 text-slate-100/80">
               {client.interactions.length} registro(s) de contato neste cadastro.
@@ -83,7 +83,7 @@ export default async function ClientDetailPage({ params }) {
             </span>
             <div>
               <h2 className={cardTitle}>Acompanhamento</h2>
-              <p className={mutedText}>Registre contatos, proximas acoes e observacoes de venda.</p>
+              <p className={mutedText}>Registre contatos, próximas ações e observações de venda.</p>
             </div>
           </div>
           <InteractionCreateForm clientId={client.id} />
@@ -118,9 +118,9 @@ export default async function ClientDetailPage({ params }) {
               <FileTextIcon className="h-5 w-5" />
             </span>
             <div>
-              <h2 className={cardTitle}>Historico de simulacoes</h2>
+              <h2 className={cardTitle}>Histórico de simulações</h2>
               <p className={mutedText}>
-                {client.simulations.length} simulacao(oes) vinculada(s) a este cliente.
+                {client.simulations.length} simulação(ões) vinculada(s) a este cliente.
               </p>
             </div>
           </div>
@@ -129,11 +129,11 @@ export default async function ClientDetailPage({ params }) {
             className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-700 transition hover:border-amber-300 hover:bg-amber-100"
           >
             <SimulationIcon className="h-4 w-4" />
-            Nova simulacao no modulo
+            Nova simulação no módulo
           </a>
           <div className="grid gap-3">
             {client.simulations.length === 0 ? (
-              <p className={mutedText}>Nenhuma simulacao salva para este cliente.</p>
+              <p className={mutedText}>Nenhuma simulação salva para este cliente.</p>
             ) : (
               client.simulations.map((simulation) => {
                 const payload = deserializeSimulationPayload(simulation.payload);
