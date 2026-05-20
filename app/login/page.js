@@ -40,13 +40,13 @@ export default async function LoginPage() {
           </p>
 
           <div className="mt-8 grid gap-4">
-            <article className={featureCard}>
+            <article className={`${featureCard} border-white/18 bg-white/10`}>
               <strong className="block text-base font-semibold">CRM operacional</strong>
               <p className="mt-2 text-sm leading-6 text-slate-100/80">
                 Controle de clientes, histórico e próximas ações em um único painel.
               </p>
             </article>
-            <article className={featureCard}>
+            <article className={`${featureCard} border-white/18 bg-white/10`}>
               <strong className="block text-base font-semibold">Simulação comercial</strong>
               <p className="mt-2 text-sm leading-6 text-slate-100/80">
                 Monte a proposta e entregue um PDF mais apresentável para o cliente.
@@ -57,11 +57,11 @@ export default async function LoginPage() {
 
         <div className={authFormPanel}>
           <div className="mb-8">
-            <p className="text-sm font-medium text-slate-500">Entrar</p>
-            <h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-slate-950">
+            <p className="text-sm font-medium uppercase tracking-[0.16em] text-[var(--color-warm)]">Entrar</p>
+            <h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
               Acesse sua operação
             </h2>
-            <p className="mt-3 text-sm leading-6 text-slate-500">
+            <p className="mt-3 text-sm leading-6 text-[var(--color-text-muted)]">
               Use o email e a senha do consultor para continuar.
             </p>
           </div>

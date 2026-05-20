@@ -50,7 +50,7 @@ export default async function ClientDetailPage({ params }) {
       <section className={heroPanel}>
         <div className="grid gap-4 lg:grid-cols-[1.2fr_280px]">
           <div>
-            <p className={`${pageEyebrow} text-amber-300`}>
+            <p className={pageEyebrow}>
               <ClientsIcon className="h-4 w-4" />
               Cliente
             </p>
@@ -126,7 +126,7 @@ export default async function ClientDetailPage({ params }) {
           </div>
           <a
             href={`/dashboard/simulations?clientId=${client.id}`}
-            className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-700 transition hover:border-amber-300 hover:bg-amber-100"
+            className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-accent-soft)] px-4 py-2 text-sm font-semibold text-[var(--color-primary)] transition hover:border-[var(--color-accent)] hover:bg-[var(--color-primary-soft)]"
           >
             <SimulationIcon className="h-4 w-4" />
             Nova simulação no módulo
@@ -152,7 +152,7 @@ export default async function ClientDetailPage({ params }) {
                         {formatDateTime(simulation.createdAt)}
                       </span>
                       <a
-                        className="mt-2 inline-flex text-sm font-semibold text-amber-600 hover:text-amber-700"
+                        className="mt-2 inline-flex text-sm font-semibold text-[var(--color-warm)] hover:text-[var(--color-warm-strong)]"
                         href={`/api/simulations/${simulation.id}/pdf`}
                       >
                         Baixar PDF

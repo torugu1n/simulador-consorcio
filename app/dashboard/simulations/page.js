@@ -4,10 +4,12 @@ import { deserializeSimulationPayload } from "@/lib/simulation-records";
 import { formatCurrency, formatDateTime, formatTerm } from "@/lib/simulator";
 import SimulationWorkspace from "@/components/simulations/simulation-workspace";
 import {
+  badgeClass,
   cardTitle,
   glassPanel,
   mutedText,
   panelPadding,
+  pageEyebrow,
   rowCard,
   sectionStack,
 } from "@/lib/ui";
@@ -33,6 +35,32 @@ export default async function SimulationsPage({ searchParams }) {
 
   return (
     <div className={sectionStack}>
+      <section className="rounded-[32px] border border-[var(--color-border)] bg-[radial-gradient(circle_at_top_left,rgba(62,64,149,0.08),transparent_22%),radial-gradient(circle_at_top_right,rgba(0,175,239,0.10),transparent_24%),linear-gradient(180deg,#ffffff_0%,#f8f8f8_100%)] p-6 shadow-[0_24px_60px_rgba(37,40,58,0.07)] sm:p-7">
+        <div className="grid gap-4 lg:grid-cols-[1.15fr_280px]">
+          <div>
+            <p className={pageEyebrow}>Simulações comerciais</p>
+            <h1 className="max-w-3xl text-balance text-3xl font-semibold tracking-[-0.05em] text-[var(--color-text)] sm:text-4xl">
+              Monte cenários, valide números e entregue a proposta final
+            </h1>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--color-text-muted)]">
+              Use a mesma base visual e comercial da operação para construir propostas com rapidez.
+            </p>
+          </div>
+          <div className="rounded-[24px] border border-[var(--color-border)] bg-white/90 p-4">
+            <span className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+              Volume atual
+            </span>
+            <strong className="mt-3 block text-3xl font-semibold tracking-[-0.03em] text-[var(--color-primary)]">
+              {simulations.length}
+            </strong>
+            <p className="mt-2 text-sm leading-6 text-[var(--color-text-muted)]">
+              simulação(ões) registradas para acompanhamento e geração de PDF.
+            </p>
+            <span className={`mt-3 ${badgeClass}`}>Ambiente pronto</span>
+          </div>
+        </div>
+      </section>
+
       <SimulationWorkspace
         consultantName={consultant.name}
         clientOptions={clients}
@@ -68,7 +96,7 @@ export default async function SimulationsPage({ searchParams }) {
                       {formatDateTime(simulation.createdAt)}
                     </p>
                     <a
-                      className="mt-2 inline-flex text-sm font-semibold text-amber-600 hover:text-amber-700"
+                      className="mt-2 inline-flex text-sm font-semibold text-[var(--color-warm)] hover:text-[var(--color-warm-strong)]"
                       href={`/api/simulations/${simulation.id}/pdf`}
                     >
                       Baixar PDF

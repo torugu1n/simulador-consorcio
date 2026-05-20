@@ -66,7 +66,7 @@ export default async function UsersPage() {
           {users.map((user) => (
             <article key={user.id} className={rowCard}>
               <div className="flex min-w-0 items-center gap-4">
-                <div className="grid h-11 w-11 place-items-center rounded-full bg-[linear-gradient(135deg,#0f223a_0%,#1c4168_100%)] text-sm font-semibold text-white">
+                <div className="grid h-11 w-11 place-items-center rounded-full bg-[linear-gradient(135deg,#3e4095_0%,#00afef_100%)] text-sm font-semibold text-white">
                   {user.name.slice(0, 1).toUpperCase()}
                 </div>
                 <div className="min-w-0">
@@ -77,7 +77,7 @@ export default async function UsersPage() {
                 </div>
               </div>
               <div className="text-left sm:text-right">
-                <span className="inline-flex rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">
+                <span className="inline-flex rounded-full bg-[var(--color-accent-soft)] px-3 py-1 text-xs font-semibold text-[var(--color-primary)]">
                   {user.role === "admin" ? "Administrador" : "Consultor"}
                 </span>
                 <p className="mt-2 text-sm text-slate-500">

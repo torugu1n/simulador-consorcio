@@ -36,13 +36,13 @@ export default async function SetupPage() {
           </p>
 
           <div className="mt-8 grid gap-4">
-            <article className={featureCard}>
+            <article className={`${featureCard} border-white/18 bg-white/10`}>
               <strong className="block text-base font-semibold">Primeiro acesso</strong>
               <p className="mt-2 text-sm leading-6 text-slate-100/80">
                 Defina o usuário responsável pela operação comercial inicial do sistema.
               </p>
             </article>
-            <article className={featureCard}>
+            <article className={`${featureCard} border-white/18 bg-white/10`}>
               <strong className="block text-base font-semibold">Ambiente pronto</strong>
               <p className="mt-2 text-sm leading-6 text-slate-100/80">
                 Depois do cadastro, o painel já fica liberado para clientes, follow-ups e simulações.
@@ -53,11 +53,11 @@ export default async function SetupPage() {
 
         <div className={authFormPanel}>
           <div className="mb-8">
-            <p className="text-sm font-medium text-slate-500">Setup</p>
-            <h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-slate-950">
+            <p className="text-sm font-medium uppercase tracking-[0.16em] text-[var(--color-warm)]">Setup</p>
+            <h2 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
               Inicie a operação
             </h2>
-            <p className="mt-3 text-sm leading-6 text-slate-500">
+            <p className="mt-3 text-sm leading-6 text-[var(--color-text-muted)]">
               Crie o usuário administrador inicial para liberar o restante do fluxo.
             </p>
           </div>

@@ -1,8 +1,26 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   color-scheme: light;
   --font-mono: var(--font-fira-code), "Fira Code", ui-monospace, monospace;
+  --color-surface: #f8f8f8;
+  --color-surface-soft: #e6e6e6;
+  --color-card: #ffffff;
+  --color-text: #25283a;
+  --color-text-muted: #656a78;
+  --color-border: #d9dde5;
+  --color-primary: #3e4095;
+  --color-primary-strong: #2e307c;
+  --color-primary-soft: #eef0ff;
+  --color-accent: #00afef;
+  --color-accent-soft: #e6f8ff;
+  --color-warm: #ff6600;
+  --color-warm-strong: #e55b00;
+  --color-danger: #ff0000;
+  --color-danger-soft: #ffe5e5;
 }
 
 * {
@@ -10,15 +28,27 @@
 }
 
 html {
-  background: #eef3f8;
+  background: var(--color-surface);
+}
+
+html.dark {
+  color-scheme: dark;
+  background: #0f172a;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(180deg, #f7f9fc 0%, #eef3f8 100%);
-  color: #0f172a;
+  background:
+    radial-gradient(circle at top right, rgba(0, 175, 239, 0.08), transparent 24%),
+    linear-gradient(180deg, #ffffff 0%, var(--color-surface) 100%);
+  color: var(--color-text);
   font-family: var(--font-figtree), "Figtree", sans-serif;
+}
+
+html.dark body {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  color: #f1f5f9;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -41,5 +71,5 @@ select {
 }
 
 ::selection {
-  background: rgba(245, 208, 66, 0.22);
+  background: rgba(0, 175, 239, 0.22);
 }

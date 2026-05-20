@@ -1,4 +1,5 @@
 import { Figtree, Fira_Code } from "next/font/google";
+import ThemeProvider from "@/components/common/theme-provider";
 import "./globals.css";
 
 const figtree = Figtree({
@@ -23,7 +24,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR" className={`${figtree.variable} ${firaCode.variable}`}>
-      <body>{children}</body>
+      {/* Prevent flash of wrong theme */}
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem('theme'),d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(t===null&&d))document.documentElement.classList.add('dark')}catch(e){}`,
+          }}
+        />
+      </head>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

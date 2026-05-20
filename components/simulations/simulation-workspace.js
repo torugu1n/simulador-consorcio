@@ -215,7 +215,7 @@ export default function SimulationWorkspace({
                 onChange={(event) => updateField("consultantName", event.target.value)}
               />
             </label>
-            <div className="rounded-[20px] border border-slate-200 bg-slate-50 px-4 py-3">
+            <div className="rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3">
               <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
                 Vínculo atual
               </span>
@@ -244,7 +244,7 @@ export default function SimulationWorkspace({
           <div className="grid gap-3 md:grid-cols-2">
             <label className={fieldLabel}>
               <span className={labelText}>Prazo</span>
-              <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white transition focus-within:border-amber-400 focus-within:ring-4 focus-within:ring-amber-100">
+              <div className="relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white transition focus-within:border-[var(--color-accent)] focus-within:ring-4 focus-within:ring-[rgba(0,175,239,0.12)]">
                 <input
                   className="w-full bg-transparent py-2.5 pl-4 pr-16 text-sm text-slate-900 outline-none"
                   inputMode="numeric"
@@ -282,7 +282,7 @@ export default function SimulationWorkspace({
                       className={[
                         "rounded-full px-4 py-2 text-sm font-semibold transition",
                         form.includeEmbeddedBid
-                          ? "bg-amber-400 text-slate-950 shadow-sm"
+                          ? "bg-[var(--color-warm)] text-white shadow-sm"
                           : "text-slate-500 hover:text-slate-700",
                       ].join(" ")}
                     >
@@ -379,7 +379,7 @@ export default function SimulationWorkspace({
               key={scenario.id}
               className="rounded-[24px] border border-slate-200 bg-slate-50 p-5"
             >
-              <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-amber-500">
+              <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--color-warm)]">
                 Cenário
               </p>
               <h3 className="text-lg font-semibold tracking-[-0.03em] text-slate-950">
@@ -444,7 +444,7 @@ export default function SimulationWorkspace({
           <label className={fieldLabel}>
             <span className={labelText}>Observações do PDF</span>
             <textarea
-              className="min-h-[120px] w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 outline-none transition focus:border-amber-400 focus:ring-4 focus:ring-amber-100"
+              className="min-h-[120px] w-full rounded-2xl border border-[var(--color-border)] bg-white px-4 py-2.5 text-sm text-slate-900 outline-none transition focus:border-[var(--color-accent)] focus:ring-4 focus:ring-[rgba(0,175,239,0.12)]"
               value={form.notes}
               onChange={(event) => updateField("notes", event.target.value)}
               placeholder="Informações adicionais, condições comerciais ou observações do consultor."
@@ -497,7 +497,7 @@ function PercentField({ label, value, onChange }) {
   return (
     <label className={fieldLabel}>
       <span className={labelText}>{label}</span>
-      <div className="flex overflow-hidden rounded-2xl border border-slate-200 bg-white transition focus-within:border-amber-400 focus-within:ring-4 focus-within:ring-amber-100">
+      <div className="flex overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white transition focus-within:border-[var(--color-accent)] focus-within:ring-4 focus-within:ring-[rgba(0,175,239,0.12)]">
         <input
           className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-900 outline-none"
           inputMode="decimal"
@@ -570,7 +570,7 @@ function CurrencyField({ label, value, onChange, disabled = false }) {
   return (
     <label className={fieldLabel}>
       <span className={labelText}>{label}</span>
-      <div className={`flex overflow-hidden rounded-2xl border border-slate-200 bg-white transition focus-within:border-amber-400 focus-within:ring-4 focus-within:ring-amber-100 ${disabled ? "bg-slate-50" : ""}`}>
+      <div className={`flex overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white transition focus-within:border-[var(--color-accent)] focus-within:ring-4 focus-within:ring-[rgba(0,175,239,0.12)] ${disabled ? "bg-slate-50" : ""}`}>
         <span className="flex items-center border-r border-slate-200 bg-slate-50 px-3 text-sm font-semibold text-slate-500 select-none">
           R$
         </span>
