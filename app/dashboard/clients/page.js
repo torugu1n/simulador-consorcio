@@ -43,21 +43,21 @@ export default async function ClientsPage() {
           </p>
         </div>
         <div className="grid grid-cols-3 gap-3">
-          <article className="rounded-[22px] border border-slate-200 bg-slate-50 p-5">
+          <article className="rounded-[22px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
             <span className={`${statLabel} flex items-center gap-2`}>
               <UsersIcon className="h-4 w-4" />
               Total na base
             </span>
             <strong className={statValue}>{clients.length}</strong>
           </article>
-          <article className="rounded-[22px] border border-slate-200 bg-slate-50 p-5">
+          <article className="rounded-[22px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
             <span className={`${statLabel} flex items-center gap-2`}>
               <FileTextIcon className="h-4 w-4" />
               Com contato
             </span>
             <strong className={statValue}>{withContactCount}</strong>
           </article>
-          <article className="rounded-[22px] border border-slate-200 bg-slate-50 p-5">
+          <article className="rounded-[22px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
             <span className={`${statLabel} flex items-center gap-2`}>
               <ClientsIcon className="h-4 w-4" />
               Já avançados
@@ -92,10 +92,10 @@ export default async function ClientsPage() {
                   className={rowCard}
                 >
                   <div className="min-w-0">
-                    <strong className="block truncate text-base font-semibold text-slate-950">
+                    <strong className="block truncate text-base font-semibold text-[var(--color-text)]">
                       {client.name}
                     </strong>
-                    <p className="mt-1 text-sm text-slate-500">
+                    <p className="mt-1 text-sm text-[var(--color-text-muted)]">
                       {client.email || client.phone || "Sem contato principal."}
                     </p>
                   </div>

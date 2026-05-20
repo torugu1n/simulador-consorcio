@@ -21,6 +21,8 @@
   --color-warm-strong: #e55b00;
   --color-danger: #ff0000;
   --color-danger-soft: #ffe5e5;
+  --color-backdrop: rgba(0, 175, 239, 0.08);
+  --color-card-tint: rgba(255, 255, 255, 0.9);
 }
 
 * {
@@ -33,22 +35,41 @@ html {
 
 html.dark {
   color-scheme: dark;
-  background: #0f172a;
+  background: #11162a;
+  --color-surface: #161d33;
+  --color-surface-soft: #202943;
+  --color-card: #1b2440;
+  --color-text: #f2f5ff;
+  --color-text-muted: #9eabc9;
+  --color-border: #313c61;
+  --color-primary: #8d92ff;
+  --color-primary-strong: #a7b0ff;
+  --color-primary-soft: #242f59;
+  --color-accent: #5ad5ff;
+  --color-accent-soft: #19344a;
+  --color-warm: #ff8a3d;
+  --color-warm-strong: #ffb066;
+  --color-danger: #ff6b6b;
+  --color-danger-soft: #4d1f29;
+  --color-backdrop: rgba(0, 175, 239, 0.14);
+  --color-card-tint: rgba(27, 36, 64, 0.88);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top right, rgba(0, 175, 239, 0.08), transparent 24%),
+    radial-gradient(circle at top right, var(--color-backdrop), transparent 24%),
     linear-gradient(180deg, #ffffff 0%, var(--color-surface) 100%);
   color: var(--color-text);
   font-family: var(--font-figtree), "Figtree", sans-serif;
 }
 
 html.dark body {
-  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
-  color: #f1f5f9;
+  background:
+    radial-gradient(circle at top right, var(--color-backdrop), transparent 24%),
+    linear-gradient(180deg, #11162a 0%, var(--color-surface) 100%);
+  color: var(--color-text);
 }
 
 h1, h2, h3, h4, h5, h6 {

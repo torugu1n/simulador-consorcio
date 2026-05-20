@@ -46,7 +46,7 @@ export default async function SimulationsPage({ searchParams }) {
               Use a mesma base visual e comercial da operação para construir propostas com rapidez.
             </p>
           </div>
-          <div className="rounded-[24px] border border-[var(--color-border)] bg-white/90 p-4">
+          <div className="rounded-[24px] border border-[var(--color-border)] bg-[var(--color-card-tint)] p-4">
             <span className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
               Volume atual
             </span>
@@ -81,18 +81,18 @@ export default async function SimulationsPage({ searchParams }) {
               return (
                 <article key={simulation.id} className={rowCard}>
                   <div className="min-w-0">
-                    <strong className="block text-base font-semibold text-slate-950">
+                    <strong className="block text-base font-semibold text-[var(--color-text)]">
                       {simulation.title}
                     </strong>
-                    <p className="mt-1 text-sm text-slate-500">
+                    <p className="mt-1 text-sm text-[var(--color-text-muted)]">
                       {simulation.client?.name || "Sem cliente vinculado"} · {formatTerm(payload.term)}
                     </p>
                   </div>
                   <div className="text-left sm:text-right">
-                    <span className="block text-sm font-semibold text-slate-800">
+                    <span className="block text-sm font-semibold text-[var(--color-text)]">
                       {formatCurrency(payload.assetValue)}
                     </span>
-                    <p className="mt-1 text-sm text-slate-500">
+                    <p className="mt-1 text-sm text-[var(--color-text-muted)]">
                       {formatDateTime(simulation.createdAt)}
                     </p>
                     <a

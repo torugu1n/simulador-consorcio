@@ -153,11 +153,11 @@ export default function SimulationWorkspace({
       <div className="grid gap-4 xl:grid-cols-[1.05fr_0.95fr]">
         <section className={`${glassPanel} p-5`}>
           <div className="mb-4 flex items-start gap-3">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-slate-100 text-slate-600">
+            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[var(--color-primary-soft)] text-[var(--color-primary)]">
               <FileTextIcon className="h-5 w-5" />
             </span>
             <div>
-              <h3 className="text-lg font-semibold tracking-[-0.02em] text-slate-950">
+              <h3 className="text-lg font-semibold tracking-[-0.02em] text-[var(--color-text)]">
                 Identificação da proposta
               </h3>
               <p className={mutedText}>
@@ -216,10 +216,10 @@ export default function SimulationWorkspace({
               />
             </label>
             <div className="rounded-[20px] border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3">
-              <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+              <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
                 Vínculo atual
               </span>
-              <p className="mt-2 text-sm font-medium text-slate-700">
+              <p className="mt-2 text-sm font-medium text-[var(--color-text)]">
                 {selectedClient ? `Simulação vinculada a ${selectedClient.name}` : "Sem cliente vinculado"}
               </p>
             </div>
@@ -228,11 +228,11 @@ export default function SimulationWorkspace({
 
         <section className={`${glassPanel} p-5`}>
           <div className="mb-4 flex items-start gap-3">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-slate-100 text-slate-600">
+            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[var(--color-primary-soft)] text-[var(--color-primary)]">
               <CalendarIcon className="h-5 w-5" />
             </span>
             <div>
-              <h3 className="text-lg font-semibold tracking-[-0.02em] text-slate-950">
+              <h3 className="text-lg font-semibold tracking-[-0.02em] text-[var(--color-text)]">
                 Parâmetros financeiros
               </h3>
               <p className={mutedText}>
@@ -244,14 +244,14 @@ export default function SimulationWorkspace({
           <div className="grid gap-3 md:grid-cols-2">
             <label className={fieldLabel}>
               <span className={labelText}>Prazo</span>
-              <div className="relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white transition focus-within:border-[var(--color-accent)] focus-within:ring-4 focus-within:ring-[rgba(0,175,239,0.12)]">
+              <div className="relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] transition focus-within:border-[var(--color-accent)] focus-within:ring-4 focus-within:ring-[rgba(0,175,239,0.12)]">
                 <input
-                  className="w-full bg-transparent py-2.5 pl-4 pr-16 text-sm text-slate-900 outline-none"
+                  className="w-full bg-transparent py-2.5 pl-4 pr-16 text-sm text-[var(--color-text)] outline-none"
                   inputMode="numeric"
                   value={form.term}
                   onChange={(event) => updateField("term", event.target.value.replace(/\D/g, ""))}
                 />
-                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm text-slate-400 select-none">
+                <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm text-[var(--color-text-muted)] select-none">
                   meses
                 </span>
               </div>
@@ -275,7 +275,7 @@ export default function SimulationWorkspace({
               <div className="grid gap-3 md:grid-cols-[180px_1fr] md:items-end">
                 <label className={fieldLabel}>
                   <span className={labelText}>Usar lance embutido?</span>
-                  <div className="inline-flex w-fit rounded-full border border-slate-200 bg-slate-100 p-1">
+                  <div className="inline-flex w-fit rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] p-1">
                     <button
                       type="button"
                       onClick={() => updateEmbeddedBidState(true)}
@@ -283,7 +283,7 @@ export default function SimulationWorkspace({
                         "rounded-full px-4 py-2 text-sm font-semibold transition",
                         form.includeEmbeddedBid
                           ? "bg-[var(--color-warm)] text-white shadow-sm"
-                          : "text-slate-500 hover:text-slate-700",
+                          : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]",
                       ].join(" ")}
                     >
                       Sim
@@ -294,8 +294,8 @@ export default function SimulationWorkspace({
                       className={[
                         "rounded-full px-4 py-2 text-sm font-semibold transition",
                         !form.includeEmbeddedBid
-                          ? "bg-white text-slate-900 shadow-sm"
-                          : "text-slate-500 hover:text-slate-700",
+                          ? "bg-[var(--color-card)] text-[var(--color-text)] shadow-sm"
+                          : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]",
                       ].join(" ")}
                     >
                       Não
@@ -317,11 +317,11 @@ export default function SimulationWorkspace({
 
       <section className={`${glassPanel} p-5`}>
         <div className="mb-4 flex items-start gap-3">
-          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-slate-100 text-slate-600">
+          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[var(--color-primary-soft)] text-[var(--color-primary)]">
             <MoneyIcon className="h-5 w-5" />
           </span>
           <div>
-            <h3 className="text-lg font-semibold tracking-[-0.02em] text-slate-950">
+            <h3 className="text-lg font-semibold tracking-[-0.02em] text-[var(--color-text)]">
               Resumo financeiro
             </h3>
             <p className={mutedText}>
@@ -332,26 +332,26 @@ export default function SimulationWorkspace({
 
         <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
           <article className={metricCard}>
-            <span className="text-sm text-slate-500">Total do lance</span>
-            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] tabular-nums truncate text-slate-950">
+            <span className="text-sm text-[var(--color-text-muted)]">Total do lance</span>
+            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] tabular-nums truncate text-[var(--color-text)]">
               {formatCurrency(simulation.metrics.totalBid)}
             </strong>
           </article>
           <article className={metricCard}>
-            <span className="text-sm text-slate-500">% do lance</span>
-            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] tabular-nums truncate text-slate-950">
+            <span className="text-sm text-[var(--color-text-muted)]">% do lance</span>
+            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] tabular-nums truncate text-[var(--color-text)]">
               {formatPercent(simulation.metrics.bidPercent)}
             </strong>
           </article>
           <article className={metricCard}>
-            <span className="text-sm text-slate-500">Parcela integral (100%)</span>
-            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] tabular-nums truncate text-slate-950">
+            <span className="text-sm text-[var(--color-text-muted)]">Parcela integral (100%)</span>
+            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] tabular-nums truncate text-[var(--color-text)]">
               {formatCurrency(simulation.metrics.fullInstallment)}
             </strong>
           </article>
           <article className={metricCard}>
-            <span className="text-sm text-slate-500">Parcela reduzida (75%)</span>
-            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] tabular-nums truncate text-slate-950">
+            <span className="text-sm text-[var(--color-text-muted)]">Parcela reduzida (75%)</span>
+            <strong className="mt-2 block text-2xl font-semibold tracking-[-0.03em] tabular-nums truncate text-[var(--color-text)]">
               {formatCurrency(simulation.metrics.reducedInstallment)}
             </strong>
           </article>
@@ -360,11 +360,11 @@ export default function SimulationWorkspace({
 
       <section className={`${glassPanel} p-5`}>
         <div className="mb-4 flex items-start gap-3">
-          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-slate-100 text-slate-600">
+          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[var(--color-primary-soft)] text-[var(--color-primary)]">
             <ActivityIcon className="h-5 w-5" />
           </span>
           <div>
-            <h3 className="text-lg font-semibold tracking-[-0.02em] text-slate-950">
+            <h3 className="text-lg font-semibold tracking-[-0.02em] text-[var(--color-text)]">
               Cenários projetados
             </h3>
             <p className={mutedText}>
@@ -377,35 +377,35 @@ export default function SimulationWorkspace({
           {Object.values(simulation.scenarios).map((scenario) => (
             <article
               key={scenario.id}
-              className="rounded-[24px] border border-slate-200 bg-slate-50 p-5"
+              className="rounded-[24px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5"
             >
               <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--color-warm)]">
                 Cenário
               </p>
-              <h3 className="text-lg font-semibold tracking-[-0.03em] text-slate-950">
+              <h3 className="text-lg font-semibold tracking-[-0.03em] text-[var(--color-text)]">
                 {scenario.title}
               </h3>
               <span className={`mt-4 ${badgeClass}`}>{scenario.mode}</span>
               <div className="mt-4 grid gap-3 grid-cols-3">
                 <div className="min-w-0">
-                  <span className="text-xs text-slate-500 sm:text-sm">
+                  <span className="text-xs text-[var(--color-text-muted)] sm:text-sm">
                     {scenario.type === "installment" ? "Nova parcela" : "Parcela mantida"}
                   </span>
-                  <strong className={`mt-1 block truncate text-base font-semibold tracking-[-0.02em] tabular-nums sm:text-xl ${scenario.type === "installment" ? "text-slate-950" : "text-slate-400"}`}>
+                  <strong className={`mt-1 block truncate text-base font-semibold tracking-[-0.02em] tabular-nums sm:text-xl ${scenario.type === "installment" ? "text-[var(--color-text)]" : "text-[var(--color-text-muted)]"}`}>
                     {formatCurrency(scenario.installment)}
                   </strong>
                 </div>
                 <div className="min-w-0">
-                  <span className="text-xs text-slate-500 sm:text-sm">
+                  <span className="text-xs text-[var(--color-text-muted)] sm:text-sm">
                     {scenario.type === "term" ? "Novo prazo" : "Prazo restante"}
                   </span>
-                  <strong className={`mt-1 block truncate text-base font-semibold tracking-[-0.02em] sm:text-xl ${scenario.type === "term" ? "text-slate-950" : "text-slate-400"}`}>
+                  <strong className={`mt-1 block truncate text-base font-semibold tracking-[-0.02em] sm:text-xl ${scenario.type === "term" ? "text-[var(--color-text)]" : "text-[var(--color-text-muted)]"}`}>
                     {formatTerm(scenario.remainingTerm)}
                   </strong>
                 </div>
                 <div className="min-w-0">
-                  <span className="text-xs text-slate-500 sm:text-sm">Custo total</span>
-                  <strong className="mt-1 block truncate text-base font-semibold tracking-[-0.02em] tabular-nums text-slate-950 sm:text-xl">
+                  <span className="text-xs text-[var(--color-text-muted)] sm:text-sm">Custo total</span>
+                  <strong className="mt-1 block truncate text-base font-semibold tracking-[-0.02em] tabular-nums text-[var(--color-text)] sm:text-xl">
                     {formatCurrency(scenario.totalCost)}
                   </strong>
                 </div>
@@ -437,14 +437,14 @@ export default function SimulationWorkspace({
                 <option value="partialAssetReducedTerm">Crédito Parcial (75%) — Redução de Prazo</option>
               </select>
             </label>
-            <div className="grid gap-3 rounded-[22px] border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 mt-auto">
+            <div className="mt-auto grid gap-3 rounded-[22px] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 text-sm text-[var(--color-text-muted)]">
               <p>O cenário selecionado ganhará destaque visual na página de comparativos do PDF comercial.</p>
             </div>
           </div>
           <label className={fieldLabel}>
             <span className={labelText}>Observações do PDF</span>
             <textarea
-              className="min-h-[120px] w-full rounded-2xl border border-[var(--color-border)] bg-white px-4 py-2.5 text-sm text-slate-900 outline-none transition focus:border-[var(--color-accent)] focus:ring-4 focus:ring-[rgba(0,175,239,0.12)]"
+              className="min-h-[120px] w-full rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition focus:border-[var(--color-accent)] focus:ring-4 focus:ring-[rgba(0,175,239,0.12)]"
               value={form.notes}
               onChange={(event) => updateField("notes", event.target.value)}
               placeholder="Informações adicionais, condições comerciais ou observações do consultor."
@@ -497,16 +497,16 @@ function PercentField({ label, value, onChange }) {
   return (
     <label className={fieldLabel}>
       <span className={labelText}>{label}</span>
-      <div className="flex overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white transition focus-within:border-[var(--color-accent)] focus-within:ring-4 focus-within:ring-[rgba(0,175,239,0.12)]">
+      <div className="flex overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] transition focus-within:border-[var(--color-accent)] focus-within:ring-4 focus-within:ring-[rgba(0,175,239,0.12)]">
         <input
-          className="flex-1 bg-transparent px-4 py-2.5 text-sm text-slate-900 outline-none"
+          className="flex-1 bg-transparent px-4 py-2.5 text-sm text-[var(--color-text)] outline-none"
           inputMode="decimal"
           value={display}
           onChange={handleChange}
           onFocus={() => setIsFocused(true)}
           onBlur={handleBlur}
         />
-        <span className="flex items-center border-l border-slate-200 bg-slate-50 px-3 text-sm font-semibold text-slate-500 select-none">
+        <span className="flex items-center border-l border-[var(--color-border)] bg-[var(--color-surface)] px-3 text-sm font-semibold text-[var(--color-text-muted)] select-none">
           %
         </span>
       </div>
@@ -570,12 +570,12 @@ function CurrencyField({ label, value, onChange, disabled = false }) {
   return (
     <label className={fieldLabel}>
       <span className={labelText}>{label}</span>
-      <div className={`flex overflow-hidden rounded-2xl border border-[var(--color-border)] bg-white transition focus-within:border-[var(--color-accent)] focus-within:ring-4 focus-within:ring-[rgba(0,175,239,0.12)] ${disabled ? "bg-slate-50" : ""}`}>
-        <span className="flex items-center border-r border-slate-200 bg-slate-50 px-3 text-sm font-semibold text-slate-500 select-none">
+      <div className={`flex overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] transition focus-within:border-[var(--color-accent)] focus-within:ring-4 focus-within:ring-[rgba(0,175,239,0.12)] ${disabled ? "bg-[var(--color-surface)]" : ""}`}>
+        <span className="flex items-center border-r border-[var(--color-border)] bg-[var(--color-surface)] px-3 text-sm font-semibold text-[var(--color-text-muted)] select-none">
           R$
         </span>
         <input
-          className={`flex-1 bg-transparent px-3 py-2.5 text-sm text-slate-900 outline-none ${disabled ? "cursor-not-allowed text-slate-400" : ""}`}
+          className={`flex-1 bg-transparent px-3 py-2.5 text-sm text-[var(--color-text)] outline-none ${disabled ? "cursor-not-allowed text-[var(--color-text-muted)]" : ""}`}
           inputMode="numeric"
           value={display}
           onChange={handleChange}

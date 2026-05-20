@@ -51,7 +51,7 @@ export default async function DashboardPage() {
             </p>
           </div>
 
-          <div className="rounded-[24px] border border-[var(--color-border)] bg-white/90 p-4 backdrop-blur-sm">
+          <div className="rounded-[24px] border border-[var(--color-border)] bg-[var(--color-card-tint)] p-4 backdrop-blur-sm">
             <span className="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
               Consultor logado
             </span>
@@ -74,7 +74,7 @@ export default async function DashboardPage() {
         </div>
 
         <div className="mt-5 grid gap-3 md:grid-cols-2">
-          <article className="rounded-[22px] border border-[var(--color-border)] bg-white/90 p-4 text-[var(--color-text)]">
+          <article className="rounded-[22px] border border-[var(--color-border)] bg-[var(--color-card-tint)] p-4 text-[var(--color-text)]">
             <span className="text-sm text-[var(--color-text-muted)]">Ritmo comercial</span>
             <strong className="mt-2 block text-3xl font-semibold tracking-[-0.03em] text-[var(--color-primary)]">
               {conversionRate}%
@@ -83,7 +83,7 @@ export default async function DashboardPage() {
               Relação entre clientes cadastrados e simulações geradas.
             </p>
           </article>
-          <article className="rounded-[22px] border border-[var(--color-border)] bg-white/90 p-4 text-[var(--color-text)]">
+          <article className="rounded-[22px] border border-[var(--color-border)] bg-[var(--color-card-tint)] p-4 text-[var(--color-text)]">
             <span className="text-sm text-[var(--color-text-muted)]">Carteira ativa</span>
             <strong className="mt-2 block text-3xl font-semibold tracking-[-0.03em] text-[var(--color-accent)]">
               {data.pendingFollowUps}
@@ -97,29 +97,29 @@ export default async function DashboardPage() {
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         <article className={metricCard}>
-          <span className="flex items-center gap-2 text-sm text-slate-500">
+          <span className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
             <ClientsIcon className="h-4 w-4" />
             Clientes
           </span>
-          <strong className="mt-2 block text-3xl font-semibold tracking-[-0.04em] text-slate-950">
+          <strong className="mt-2 block text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
             {data.clientCount}
           </strong>
         </article>
         <article className={metricCard}>
-          <span className="flex items-center gap-2 text-sm text-slate-500">
+          <span className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
             <SimulationIcon className="h-4 w-4" />
             Simulações
           </span>
-          <strong className="mt-2 block text-3xl font-semibold tracking-[-0.04em] text-slate-950">
+          <strong className="mt-2 block text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
             {data.simulationCount}
           </strong>
         </article>
         <article className={metricCard}>
-          <span className="flex items-center gap-2 text-sm text-slate-500">
+          <span className="flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
             <ActivityIcon className="h-4 w-4" />
             Follow-ups ativos
           </span>
-          <strong className="mt-2 block text-3xl font-semibold tracking-[-0.04em] text-slate-950">
+          <strong className="mt-2 block text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text)]">
             {data.pendingFollowUps}
           </strong>
         </article>
@@ -142,10 +142,10 @@ export default async function DashboardPage() {
                   href={`/dashboard/clients/${client.id}`}
                 >
                   <div className="min-w-0">
-                    <strong className="block truncate text-base font-semibold text-slate-950">
+                    <strong className="block truncate text-base font-semibold text-[var(--color-text)]">
                       {client.name}
                     </strong>
-                    <p className="mt-1 text-sm text-slate-500">
+                    <p className="mt-1 text-sm text-[var(--color-text-muted)]">
                       {client.email || client.phone || "Sem contato principal."}
                     </p>
                   </div>
@@ -172,18 +172,18 @@ export default async function DashboardPage() {
                 return (
                   <article key={simulation.id} className={rowCard}>
                     <div className="min-w-0">
-                      <strong className="block truncate text-base font-semibold text-slate-950">
+                      <strong className="block truncate text-base font-semibold text-[var(--color-text)]">
                         {simulation.title}
                       </strong>
-                      <p className="mt-1 text-sm text-slate-500">
+                      <p className="mt-1 text-sm text-[var(--color-text-muted)]">
                         {simulation.client?.name || "Sem cliente vinculado"}
                       </p>
                     </div>
                     <div className="text-left sm:text-right">
-                      <span className="block text-sm font-semibold text-slate-800">
+                      <span className="block text-sm font-semibold text-[var(--color-text)]">
                         {formatCurrency(payload.assetValue)}
                       </span>
-                      <p className="mt-1 text-sm text-slate-500">
+                      <p className="mt-1 text-sm text-[var(--color-text-muted)]">
                         {formatDateTime(simulation.createdAt)}
                       </p>
                     </div>

@@ -46,11 +46,11 @@ export default async function UsersPage() {
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
-          <article className="rounded-[22px] border border-slate-200 bg-slate-50 p-5">
+          <article className="rounded-[22px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
             <span className={statLabel}>Total de usuarios</span>
             <strong className={statValue}>{users.length}</strong>
           </article>
-          <article className="rounded-[22px] border border-slate-200 bg-slate-50 p-5">
+          <article className="rounded-[22px] border border-[var(--color-border)] bg-[var(--color-surface)] p-5">
             <span className={statLabel}>Administradores</span>
             <strong className={statValue}>{adminCount}</strong>
           </article>
@@ -70,17 +70,17 @@ export default async function UsersPage() {
                   {user.name.slice(0, 1).toUpperCase()}
                 </div>
                 <div className="min-w-0">
-                  <strong className="block truncate text-base font-semibold text-slate-950">
+                  <strong className="block truncate text-base font-semibold text-[var(--color-text)]">
                     {user.name}
                   </strong>
-                  <p className="mt-1 text-sm text-slate-500">{user.email}</p>
+                  <p className="mt-1 text-sm text-[var(--color-text-muted)]">{user.email}</p>
                 </div>
               </div>
               <div className="text-left sm:text-right">
                 <span className="inline-flex rounded-full bg-[var(--color-accent-soft)] px-3 py-1 text-xs font-semibold text-[var(--color-primary)]">
                   {user.role === "admin" ? "Administrador" : "Consultor"}
                 </span>
-                <p className="mt-2 text-sm text-slate-500">
+                <p className="mt-2 text-sm text-[var(--color-text-muted)]">
                   Criado em {formatDateTime(user.createdAt)}
                 </p>
               </div>

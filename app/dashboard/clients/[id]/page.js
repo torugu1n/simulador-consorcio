@@ -78,7 +78,7 @@ export default async function ClientDetailPage({ params }) {
       <section className="grid gap-5 xl:grid-cols-[0.95fr_1.05fr]">
         <article className={`${glassPanel} ${panelPadding}`}>
           <div className="mb-5 flex items-start gap-3">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-slate-100 text-slate-600">
+            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[var(--color-primary-soft)] text-[var(--color-primary)]">
               <ActivityIcon className="h-5 w-5" />
             </span>
             <div>
@@ -95,14 +95,14 @@ export default async function ClientDetailPage({ params }) {
               client.interactions.map((interaction) => (
                 <article key={interaction.id} className={rowCard}>
                   <div className="min-w-0">
-                    <strong className="block text-base font-semibold text-slate-950">
+                    <strong className="block text-base font-semibold text-[var(--color-text)]">
                       {interaction.subject}
                     </strong>
-                    <p className="mt-1 text-sm text-slate-500">{interaction.notes}</p>
+                    <p className="mt-1 text-sm text-[var(--color-text-muted)]">{interaction.notes}</p>
                   </div>
                   <div className="text-left sm:text-right">
                     <span className={badgeClass}>{interaction.type}</span>
-                    <p className="mt-2 text-sm text-slate-500">
+                    <p className="mt-2 text-sm text-[var(--color-text-muted)]">
                       {formatDateTime(interaction.createdAt)}
                     </p>
                   </div>
@@ -114,7 +114,7 @@ export default async function ClientDetailPage({ params }) {
 
         <article className={`${glassPanel} ${panelPadding}`}>
           <div className="mb-5 flex items-start gap-3">
-            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-slate-100 text-slate-600">
+            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[var(--color-primary-soft)] text-[var(--color-primary)]">
               <FileTextIcon className="h-5 w-5" />
             </span>
             <div>
@@ -140,15 +140,15 @@ export default async function ClientDetailPage({ params }) {
                 return (
                   <article key={simulation.id} className={rowCard}>
                     <div className="min-w-0">
-                      <strong className="block text-base font-semibold text-slate-950">
+                      <strong className="block text-base font-semibold text-[var(--color-text)]">
                         {simulation.title}
                       </strong>
-                      <p className="mt-1 text-sm text-slate-500">
+                      <p className="mt-1 text-sm text-[var(--color-text-muted)]">
                         {formatCurrency(payload.assetValue)} · {formatTerm(payload.term)}
                       </p>
                     </div>
                     <div className="text-left sm:text-right">
-                      <span className="block text-sm text-slate-500">
+                      <span className="block text-sm text-[var(--color-text-muted)]">
                         {formatDateTime(simulation.createdAt)}
                       </span>
                       <a
